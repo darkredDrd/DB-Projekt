@@ -5,19 +5,13 @@ using University.Models;
 
 namespace University.Persistence.Configuration
 {
-    public class StudentConfiguration : IEntityTypeConfiguration<Student>
+    public class CourseConfiguration : IEntityTypeConfiguration<Course>
     {
-        public void Configure(EntityTypeBuilder<Student> builder)
+        public void Configure(EntityTypeBuilder<Course> builder)
         {
             builder.HasKey(s => s.Id);
 
-            builder.Property(s => s.FirstName).HasMaxLength(50).IsRequired();
-            builder.Property(s => s.LastName).HasMaxLength(100).IsRequired();
-
-            builder.Property(s => s.Phone).HasMaxLength(15);
-
-            builder.Property(s => s.Email).HasMaxLength(200).IsRequired();
-            builder.Property(s => s.PassportNumber).HasMaxLength(15).IsRequired();
+            builder.Property(s => s.Topic).HasMaxLength(100).IsRequired();
         }
     }
 }

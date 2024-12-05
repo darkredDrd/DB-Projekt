@@ -34,6 +34,7 @@ public class StudentUpdateViewModel
     {
         var student = new Student
         {
+            Id = this.Id,
             PassportNumber = this.PassportNumber,
             Email = this.Email,
             FirstName = this.FirstName,
@@ -49,6 +50,7 @@ public class StudentUpdateViewModel
     {
         var studentUpdateViewModel = new StudentUpdateViewModel
         {
+            Id = student.Id,
             PassportNumber = student.PassportNumber,
             Email = student.Email,
             FirstName = student.FirstName,

@@ -3,30 +3,30 @@ using Microsoft.EntityFrameworkCore;
 
 using University.Persistence;
 
-using University.MVC.Models.Students;
+using University.MVC.Models.Courses;
 
 namespace University.MVC.Controllers
 {
-    public class StudentsController : Controller
+    public class CoursesController : Controller
     {
         private readonly UniversityContext context;
 
-        public StudentsController(UniversityContext context)
+        public CoursesController(UniversityContext context)
         {
             this.context = context;
         }
 
-        // GET: Students
+        // GET: Courses
         public async Task<IActionResult> Index()
         {
-            var students = await context.Students.ToListAsync();
+            var courses = await context.Courses.ToListAsync();
 
-            var studentListViewModels = students.Select(StudentListViewModel.FromStudent).ToList();
+            var courseListViewModels = courses.Select(CourseListViewModel.FromCourse).ToList();
 
-            return View(studentListViewModels);
+            return View(courseListViewModels);
         }
 
-        // GET: Students/Details/5
+        // GET: Courses/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,44 +34,44 @@ namespace University.MVC.Controllers
                 return NotFound();
             }
 
-            var student = await context.Students
+            var course = await context.Courses
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (student == null)
+            if (course == null)
             {
                 return NotFound();
             }
 
-            var studentDetailsViewModel = StudentDetailsViewModel.FromStudent(student);
+            var courseDetailsViewModel = CourseDetailsViewModel.FromCourse(course);
 
-            return View(studentDetailsViewModel);
+            return View(courseDetailsViewModel);
         }
 
-        // GET: Students/Create
+        // GET: Courses/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Students/Create
+        // POST: Courses/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(StudentCreateViewModel studentCreateViewModel)
+        public async Task<IActionResult> Create(CourseCreateViewModel courseCreateViewModel)
         {
             if (ModelState.IsValid)
             {
-                var student = studentCreateViewModel.ToStudent();
+                var course = courseCreateViewModel.ToCourse();
 
-                context.Add(student);
+                context.Add(course);
                 await context.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
             }
-            return View(studentCreateViewModel);
+            return View(courseCreateViewModel);
         }
 
-        // GET: Students/Edit/5
+        // GET: Courses/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -79,39 +79,39 @@ namespace University.MVC.Controllers
                 return NotFound();
             }
 
-            var student = await context.Students.FindAsync(id);
-            if (student == null)
+            var course = await context.Courses.FindAsync(id);
+            if (course == null)
             {
                 return NotFound();
             }
 
-            var studentUpdateViewModel = StudentUpdateViewModel.FromStudent(student);
-            return View(studentUpdateViewModel);
+            var courseUpdateViewModel = CourseUpdateViewModel.FromCourse(course);
+            return View(courseUpdateViewModel);
         }
 
-        // POST: Students/Edit/5
+        // POST: Courses/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, StudentUpdateViewModel studentUpdateViewModel)
+        public async Task<IActionResult> Edit(int id, CourseUpdateViewModel courseUpdateViewModel)
         {
-            if (id != studentUpdateViewModel.Id)
+            if (id != courseUpdateViewModel.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                var student = studentUpdateViewModel.ToStudent();
+                var course = courseUpdateViewModel.ToCourse();
                 try
                 {
-                    context.Update(student);
+                    context.Update(course);
                     await context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!StudentExists(student.Id))
+                    if (!CourseExists(course.Id))
                     {
                         return NotFound();
                     }
@@ -122,10 +122,10 @@ namespace University.MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(studentUpdateViewModel);
+            return View(courseUpdateViewModel);
         }
 
-        // GET: Students/Delete/5
+        // GET: Courses/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -133,36 +133,36 @@ namespace University.MVC.Controllers
                 return NotFound();
             }
 
-            var student = await context.Students
+            var course = await context.Courses
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (student == null)
+            if (course == null)
             {
                 return NotFound();
             }
 
-            var studentDetailsViewModel = StudentDetailsViewModel.FromStudent(student);
+            var courseDetailsViewModel = CourseDetailsViewModel.FromCourse(course);
 
-            return View(studentDetailsViewModel);
+            return View(courseDetailsViewModel);
         }
 
-        // POST: Students/Delete/5
+        // POST: Courses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var student = await context.Students.FindAsync(id);
-            if (student != null)
+            var course = await context.Courses.FindAsync(id);
+            if (course != null)
             {
-                context.Students.Remove(student);
+                context.Courses.Remove(course);
             }
 
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool StudentExists(int id)
+        private bool CourseExists(int id)
         {
-            return context.Students.Any(e => e.Id == id);
+            return context.Courses.Any(e => e.Id == id);
         }
     }
 }
