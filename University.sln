@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "University.Models", "Univer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "University.Persistence", "University.Persistence\University.Persistence.csproj", "{B163D775-B976-4B6F-AFAA-EA0184FFF946}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Univertsity.MVC", "Univertsity.MVC\Univertsity.MVC.csproj", "{2F8728D7-5C86-4D12-A66B-46B4D742AFD4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "University.MVC", "University.MVC\University.MVC.csproj", "{2F8728D7-5C86-4D12-A66B-46B4D742AFD4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -2,7 +2,7 @@
 
 using University.Models;
 
-namespace Univertsity.MVC.Models.Students
+namespace University.MVC.Models.Students
 {
     public class StudentCreateViewModel
     {

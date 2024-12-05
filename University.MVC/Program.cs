@@ -1,6 +1,6 @@
 using University.Persistence;
 
-namespace Univertsity.MVC
+namespace University.MVC
 {
     public class Program
     {

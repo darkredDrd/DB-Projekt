@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using University.Models;
 using University.Persistence;
 
-using Univertsity.MVC.Models.Students;
+using University.MVC.Models.Students;
 
-namespace Univertsity.MVC.Controllers
+namespace University.MVC.Controllers
 {
     public class StudentsController : Controller
     {

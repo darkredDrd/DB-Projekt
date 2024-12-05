@@ -1,4 +1,4 @@
-namespace Univertsity.MVC.Models
+namespace University.MVC.Models
 {
     public class ErrorViewModel
     {
