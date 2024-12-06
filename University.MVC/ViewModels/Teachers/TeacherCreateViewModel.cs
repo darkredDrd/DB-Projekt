@@ -8,10 +8,12 @@ namespace University.MVC.ViewModels.Teachers
     {
         [Required]
         [MaxLength(50)]
+        [Display(Name = "First name")]
         public string FirstName { get; set; }
 
         [Required]
         [MaxLength(100)]
+        [Display(Name = "Last name")]
         public string LastName { get; set; }
 
         [MaxLength(15)]
@@ -23,6 +25,7 @@ namespace University.MVC.ViewModels.Teachers
 
         [Required]
         [MaxLength(15)]
+        [Display(Name = "Passport number")]
         public string PassportNumber { get; set; }
 
         public DateTime? Birthday { get; set; }

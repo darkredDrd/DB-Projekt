@@ -1,10 +1,14 @@
-﻿using University.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+using University.Models;
 
 namespace University.MVC.ViewModels.Teachers;
 
 public class TeacherListViewModel
 {
     public int Id { get; set; }
+
+    [Display(Name = "Full name")]
     public string FullName { get; set; }
 
     public string Phone { get; set; }

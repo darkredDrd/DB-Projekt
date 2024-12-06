@@ -13,10 +13,13 @@ public class CourseUpdateViewModel
     [MaxLength(100)]
     public string Topic { get; set; }
 
+    [Display(Name = "Number of hours")]
     public int NumberOfHours { get; set; }
 
+    [Display(Name = "Start date")]
     public DateTime StartDate { get; set; }
 
+    [Display(Name = "End date")]
     public DateTime EndDate { get; set; }
 
     public List<Checkbox> StudentCheckboxes { get; set; } = new();
