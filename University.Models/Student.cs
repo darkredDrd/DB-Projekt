@@ -16,6 +16,8 @@
 
         public DateTime? Birthday { get; set; }
 
-        public ICollection<Course> Courses { get; set; } 
+        public ICollection<Course> Courses { get; set; }
+
+        public ICollection<Mark> Marks { get; set; }
     }
 }

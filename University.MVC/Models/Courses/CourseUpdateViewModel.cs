@@ -19,7 +19,9 @@ public class CourseUpdateViewModel
 
     public DateTime EndDate { get; set; }
 
-    public List<StudentCheckbox> StudentCheckboxes { get; set; } = new();
+    public List<Checkbox> StudentCheckboxes { get; set; } = new();
+    public List<Checkbox> TeacherCheckboxes { get; set; } = new();
+
 
     public Course ToCourse()
     {
@@ -35,7 +37,7 @@ public class CourseUpdateViewModel
         return course;
     }
 
-    public static CourseUpdateViewModel FromCourse(Course course, List<Student> allStudents)
+    public static CourseUpdateViewModel FromCourse(Course course, List<Student> allStudents, List<Teacher> allTeachers)
     {
         var courseUpdateViewModel = new CourseUpdateViewModel
         {
@@ -48,7 +50,7 @@ public class CourseUpdateViewModel
 
         foreach (var student in allStudents)
         {
-            var studentCheckbox = new StudentCheckbox
+            var studentCheckbox = new Checkbox
             {
                 Id = student.Id,
                 Label = $"{student.FirstName} {student.LastName}",
@@ -58,11 +60,23 @@ public class CourseUpdateViewModel
             courseUpdateViewModel.StudentCheckboxes.Add(studentCheckbox);
         }
 
+        foreach (var teacher in allTeachers)
+        {
+            var teacherCheckbox = new Checkbox
+            {
+                Id = teacher.Id,
+                Label = $"{teacher.FirstName} {teacher.LastName}",
+                Checked = course.Teachers.Any(cs => cs.Id == teacher.Id)
+            };
+
+            courseUpdateViewModel.TeacherCheckboxes.Add(teacherCheckbox);
+        }
+
         return courseUpdateViewModel;
     }
 }
 
-public class StudentCheckbox
+public class Checkbox
 {
     public int Id { get; set; }
     public string Label { get; set; }

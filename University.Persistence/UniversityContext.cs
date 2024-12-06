@@ -15,7 +15,10 @@ namespace University.Persistence
 
         public DbSet<Course> Courses { get; set; }
 
+        public DbSet<Teacher> Teachers { get; set; }
 
+        public DbSet<Mark> Mark { get; set; }
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
@@ -26,6 +29,8 @@ namespace University.Persistence
         {
             modelBuilder.ApplyConfiguration(new StudentConfiguration());
             modelBuilder.ApplyConfiguration(new CourseConfiguration());
+            modelBuilder.ApplyConfiguration(new TeacherConfiguration());
+            modelBuilder.ApplyConfiguration(new MarkConfiguration());
         }
     }
 }

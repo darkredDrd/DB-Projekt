@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using University.Persistence;
 
@@ -11,9 +12,11 @@ using University.Persistence;
 namespace University.Persistence.Migrations
 {
     [DbContext(typeof(UniversityContext))]
-    partial class UniversityContextModelSnapshot : ModelSnapshot
+    [Migration("20241206103308_AddTeacherEntity")]
+    partial class AddTeacherEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,40 +80,6 @@ namespace University.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Courses");
-                });
-
-            modelBuilder.Entity("University.Models.Mark", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DateAwarded")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Score")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("StudentId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TeacherId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("StudentId");
-
-                    b.HasIndex("TeacherId");
-
-                    b.ToTable("Mark");
                 });
 
             modelBuilder.Entity("University.Models.Student", b =>
@@ -221,42 +190,6 @@ namespace University.Persistence.Migrations
                         .HasForeignKey("TeachersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("University.Models.Mark", b =>
-                {
-                    b.HasOne("University.Models.Course", "Course")
-                        .WithMany("Marks")
-                        .HasForeignKey("CourseId");
-
-                    b.HasOne("University.Models.Student", "Student")
-                        .WithMany("Marks")
-                        .HasForeignKey("StudentId");
-
-                    b.HasOne("University.Models.Teacher", "Teacher")
-                        .WithMany("Marks")
-                        .HasForeignKey("TeacherId");
-
-                    b.Navigation("Course");
-
-                    b.Navigation("Student");
-
-                    b.Navigation("Teacher");
-                });
-
-            modelBuilder.Entity("University.Models.Course", b =>
-                {
-                    b.Navigation("Marks");
-                });
-
-            modelBuilder.Entity("University.Models.Student", b =>
-                {
-                    b.Navigation("Marks");
-                });
-
-            modelBuilder.Entity("University.Models.Teacher", b =>
-                {
-                    b.Navigation("Marks");
                 });
 #pragma warning restore 612, 618
         }

@@ -45,6 +45,17 @@
                 }
             </div>
             <div class="form-group">
+                <label asp-for="TeacherCheckboxes" class="control-label">Teachers:</label>
+                @for (int i = 0; i < Model.TeacherCheckboxes.Count; i++)
+                {
+                    <div>
+                        <input type="checkbox" asp-for="TeacherCheckboxes[i].Checked" />
+                        <label>@Model.TeacherCheckboxes[i].Label</label>
+                        <input type="hidden" asp-for="TeacherCheckboxes[i].Id" />
+                    </div>
+                }
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

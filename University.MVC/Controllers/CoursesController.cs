@@ -80,9 +80,12 @@ namespace University.MVC.Controllers
             }
 
             var allStudents = await context.Students.ToListAsync();
+            var allTeachers = await context.Teachers.ToListAsync();
+
 
             var course = await context.Courses
                 .Include(course => course.Students)
+                .Include(course => course.Teachers)
                 .FirstOrDefaultAsync(course => course.Id == id);
 
             if (course == null)
@@ -90,7 +93,7 @@ namespace University.MVC.Controllers
                 return NotFound();
             }
 
-            var courseUpdateViewModel = CourseUpdateViewModel.FromCourse(course, allStudents);
+            var courseUpdateViewModel = CourseUpdateViewModel.FromCourse(course, allStudents, allTeachers);
             return View(courseUpdateViewModel);
         }
 
@@ -111,7 +114,7 @@ namespace University.MVC.Controllers
                 try
                 {
                     var existingCourse = await context.Courses
-                        .Include(course => course.Students)
+                        .Include(course => course.Students).Include(course => course.Teachers)
                         .FirstOrDefaultAsync(course => course.Id == id);
 
                     existingCourse.Topic = courseUpdateViewModel.Topic;
@@ -134,6 +137,24 @@ namespace University.MVC.Controllers
                         {
                             // Remove a student from a course
                             existingCourse.Students.Remove(existingStudentInACourse);
+                        }
+                    }
+
+                    foreach (var teacherCheckbox in courseUpdateViewModel.TeacherCheckboxes)
+                    {
+                        var existingTeacherInACourse = existingCourse.Teachers.FirstOrDefault(teacher => teacher.Id == teacherCheckbox.Id);
+
+                        if (existingTeacherInACourse == null && teacherCheckbox.Checked)
+                        {
+                            // Add a teacher to a course
+                            var newTeacher = await context.Teachers.FirstOrDefaultAsync(m => m.Id == teacherCheckbox.Id);
+                            existingCourse.Teachers.Add(newTeacher);
+                        }
+
+                        if (existingTeacherInACourse != null && !teacherCheckbox.Checked)
+                        {
+                            // Remove a teacher from a course
+                            existingCourse.Teachers.Remove(existingTeacherInACourse);
                         }
                     }
 
