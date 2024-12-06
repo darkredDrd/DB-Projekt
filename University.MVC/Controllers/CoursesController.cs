@@ -79,13 +79,18 @@ namespace University.MVC.Controllers
                 return NotFound();
             }
 
-            var course = await context.Courses.FindAsync(id);
+            var allStudents = await context.Students.ToListAsync();
+
+            var course = await context.Courses
+                .Include(course => course.Students)
+                .FirstOrDefaultAsync(course => course.Id == id);
+
             if (course == null)
             {
                 return NotFound();
             }
 
-            var courseUpdateViewModel = CourseUpdateViewModel.FromCourse(course);
+            var courseUpdateViewModel = CourseUpdateViewModel.FromCourse(course, allStudents);
             return View(courseUpdateViewModel);
         }
 
@@ -103,15 +108,40 @@ namespace University.MVC.Controllers
 
             if (ModelState.IsValid)
             {
-                var course = courseUpdateViewModel.ToCourse();
                 try
                 {
-                    context.Update(course);
+                    var existingCourse = await context.Courses
+                        .Include(course => course.Students)
+                        .FirstOrDefaultAsync(course => course.Id == id);
+
+                    existingCourse.Topic = courseUpdateViewModel.Topic;
+                    existingCourse.NumberOfHours = courseUpdateViewModel.NumberOfHours;
+                    existingCourse.StartDate = courseUpdateViewModel.StartDate;
+                    existingCourse.EndDate = courseUpdateViewModel.EndDate;
+
+                    foreach (var studentCheckbox in courseUpdateViewModel.StudentCheckboxes)
+                    {
+                        var existingStudentInACourse = existingCourse.Students.FirstOrDefault(student => student.Id == studentCheckbox.Id);
+
+                        if (existingStudentInACourse == null && studentCheckbox.Checked)
+                        {
+                            // Add a student to a course
+                            var newStudent = await context.Students.FirstOrDefaultAsync(m => m.Id == studentCheckbox.Id);
+                            existingCourse.Students.Add(newStudent);
+                        }
+
+                        if (existingStudentInACourse != null && !studentCheckbox.Checked)
+                        {
+                            // Remove a student from a course
+                            existingCourse.Students.Remove(existingStudentInACourse);
+                        }
+                    }
+
                     await context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CourseExists(course.Id))
+                    if (!CourseExists(id))
                     {
                         return NotFound();
                     }

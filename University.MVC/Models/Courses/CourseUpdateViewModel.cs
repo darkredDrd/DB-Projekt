@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+using System.Linq;
 using University.Models;
 
 namespace University.MVC.Models.Courses;
@@ -19,6 +19,8 @@ public class CourseUpdateViewModel
 
     public DateTime EndDate { get; set; }
 
+    public List<StudentCheckbox> StudentCheckboxes { get; set; } = new();
+
     public Course ToCourse()
     {
         var course = new Course
@@ -33,7 +35,7 @@ public class CourseUpdateViewModel
         return course;
     }
 
-    public static CourseUpdateViewModel FromCourse(Course course)
+    public static CourseUpdateViewModel FromCourse(Course course, List<Student> allStudents)
     {
         var courseUpdateViewModel = new CourseUpdateViewModel
         {
@@ -44,6 +46,26 @@ public class CourseUpdateViewModel
             EndDate = course.EndDate,
         };
 
+        foreach (var student in allStudents)
+        {
+            var studentCheckbox = new StudentCheckbox
+            {
+                Id = student.Id,
+                Label = $"{student.FirstName} {student.LastName}",
+                Checked = course.Students.Any(cs => cs.Id == student.Id)
+            };
+
+            courseUpdateViewModel.StudentCheckboxes.Add(studentCheckbox);
+        }
+
         return courseUpdateViewModel;
     }
+}
+
+public class StudentCheckbox
+{
+    public int Id { get; set; }
+    public string Label { get; set; }
+
+    public bool Checked { get; set; }
 }

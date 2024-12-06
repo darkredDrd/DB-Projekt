@@ -15,5 +15,7 @@
         public string PassportNumber { get; set; }
 
         public DateTime? Birthday { get; set; }
+
+        public ICollection<Course> Courses { get; set; } 
     }
 }

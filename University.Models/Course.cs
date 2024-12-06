@@ -1,4 +1,6 @@
-﻿namespace University.Models
+﻿using System.Numerics;
+
+namespace University.Models
 {
     public class Course
     {
@@ -11,5 +13,7 @@
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
+
+        public ICollection<Student> Students { get; set; } = new List<Student>();
     }
 }
