@@ -12,9 +12,13 @@ public class MarkListViewModel
     [Display(Name = "Date awarded")]
     public DateTime DateAwarded { get; set; }
 
-    [Display(Name = "Course topic")]
+    [Display(Name = "Course")]
     public string CourseTopic { get; set; }
+
+    [Display(Name = "Teacher")]
     public string TeacherFullName { get; set; }
+
+    [Display(Name = "Student")]
     public string StudentFullName { get; set; }
 
     public static MarkListViewModel FromMark(Mark mark)

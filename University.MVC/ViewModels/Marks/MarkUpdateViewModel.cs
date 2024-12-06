@@ -51,6 +51,7 @@ namespace University.MVC.ViewModels.Marks
         public int Score { get; set; }
 
         [Required]
+        [Display(Name = "Date Awarded")]
         public DateTime DateAwarded { get; set; }
 
         public List<SelectListItem> Courses { get; set; }
