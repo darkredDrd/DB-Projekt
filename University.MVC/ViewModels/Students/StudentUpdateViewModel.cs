@@ -1,11 +1,10 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 using University.Models;
 
-namespace University.MVC.Models.Teachers;
+namespace University.MVC.ViewModels.Students;
 
-public class TeacherUpdateViewModel
+public class StudentUpdateViewModel
 {
     [Required]
     public int Id { get; set; }
@@ -31,9 +30,9 @@ public class TeacherUpdateViewModel
 
     public DateTime? Birthday { get; set; }
 
-    public Teacher ToTeacher()
+    public Student ToStudent()
     {
-        var teacher = new Teacher
+        var student = new Student
         {
             Id = this.Id,
             PassportNumber = this.PassportNumber,
@@ -44,22 +43,22 @@ public class TeacherUpdateViewModel
             Birthday = this.Birthday
         };
 
-        return teacher;
+        return student;
     }
 
-    public static TeacherUpdateViewModel FromTeacher(Teacher teacher)
+    public static StudentUpdateViewModel FromStudent(Student student)
     {
-        var teacherUpdateViewModel = new TeacherUpdateViewModel
+        var studentUpdateViewModel = new StudentUpdateViewModel
         {
-            Id = teacher.Id,
-            PassportNumber = teacher.PassportNumber,
-            Email = teacher.Email,
-            FirstName = teacher.FirstName,
-            LastName = teacher.LastName,
-            Phone = teacher.Phone,
-            Birthday = teacher.Birthday
+            Id = student.Id,
+            PassportNumber = student.PassportNumber,
+            Email = student.Email,
+            FirstName = student.FirstName,
+            LastName = student.LastName,
+            Phone = student.Phone,
+            Birthday = student.Birthday
         };
 
-        return teacherUpdateViewModel;
+        return studentUpdateViewModel;
     }
 }

@@ -1,6 +1,6 @@
 ﻿using University.Models;
 
-namespace University.MVC.Models.Teachers;
+namespace University.MVC.ViewModels.Teachers;
 
 public class TeacherListViewModel
 {

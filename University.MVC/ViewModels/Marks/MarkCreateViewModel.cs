@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 using University.Models;
 
-namespace University.MVC.Models.Marks
+namespace University.MVC.ViewModels.Marks
 {
     public class MarkCreateViewModel
     {

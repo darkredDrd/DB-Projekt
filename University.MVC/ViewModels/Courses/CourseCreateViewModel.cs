@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using University.Models;
 
-using University.Models;
-
-namespace University.MVC.Models.Courses;
+namespace University.MVC.ViewModels.Courses;
 
 public class CourseCreateViewModel
 {

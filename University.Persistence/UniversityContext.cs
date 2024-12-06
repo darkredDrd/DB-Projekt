@@ -17,7 +17,7 @@ namespace University.Persistence
 
         public DbSet<Teacher> Teachers { get; set; }
 
-        public DbSet<Mark> Mark { get; set; }
+        public DbSet<Mark> Marks { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

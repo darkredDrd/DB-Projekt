@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+using University.MVC.ViewModels.Teachers;
 using University.Persistence;
-
-using University.MVC.Models.Teachers;
 
 namespace University.MVC.Controllers
 {

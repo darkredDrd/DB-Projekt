@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace University.Models
+﻿namespace University.Models
 {
     public class Course
     {

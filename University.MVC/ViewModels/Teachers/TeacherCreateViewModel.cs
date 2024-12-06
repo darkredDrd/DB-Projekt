@@ -2,9 +2,9 @@
 
 using University.Models;
 
-namespace University.MVC.Models.Students
+namespace University.MVC.ViewModels.Teachers
 {
-    public class StudentCreateViewModel
+    public class TeacherCreateViewModel
     {
         [Required]
         [MaxLength(50)]
@@ -27,9 +27,9 @@ namespace University.MVC.Models.Students
 
         public DateTime? Birthday { get; set; }
 
-        public Student ToStudent()
+        public Teacher ToTeacher()
         {
-            var student = new Student
+            var teacher = new Teacher
             {
                 PassportNumber = this.PassportNumber,
                 Email = this.Email,
@@ -39,7 +39,7 @@ namespace University.MVC.Models.Students
                 Birthday = this.Birthday
             };
 
-            return student;
+            return teacher;
         }
     }
 }

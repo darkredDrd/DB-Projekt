@@ -1,6 +1,6 @@
 ﻿using University.Models;
 
-namespace University.MVC.Models.Students;
+namespace University.MVC.ViewModels.Students;
 
 public class StudentListViewModel
 {

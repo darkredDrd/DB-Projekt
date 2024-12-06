@@ -1,10 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using University.Models;
 
-using University.Models;
+namespace University.MVC.ViewModels.Courses;
 
-namespace University.MVC.Models.Courses;
-
-public class CourseDetailsViewModel
+public class CourseListViewModel
 {
     public int Id { get; set; }
 
@@ -16,9 +14,9 @@ public class CourseDetailsViewModel
 
     public DateTime EndDate { get; set; }
 
-    public static CourseDetailsViewModel FromCourse(Course course)
+    public static CourseListViewModel FromCourse(Course course)
     {
-        var courseDetailsViewModel = new CourseDetailsViewModel
+        var courseListViewModel = new CourseListViewModel
         {
             Id = course.Id,
             Topic = course.Topic,
@@ -27,6 +25,6 @@ public class CourseDetailsViewModel
             EndDate = course.EndDate,
         };
 
-        return courseDetailsViewModel;
+        return courseListViewModel;
     }
 }

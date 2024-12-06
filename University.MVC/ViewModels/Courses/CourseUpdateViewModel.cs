@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Linq;
+
 using University.Models;
 
-namespace University.MVC.Models.Courses;
+namespace University.MVC.ViewModels.Courses;
 
 public class CourseUpdateViewModel
 {

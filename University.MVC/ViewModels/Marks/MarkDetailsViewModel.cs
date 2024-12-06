@@ -2,9 +2,9 @@
 
 using University.Models;
 
-namespace University.MVC.Models.Marks;
+namespace University.MVC.ViewModels.Marks;
 
-public class MarkListViewModel
+public class MarkDetailsViewModel
 {
     public int Id { get; set; }
     public int Score { get; set; }
@@ -17,9 +17,9 @@ public class MarkListViewModel
     public string TeacherFullName { get; set; }
     public string StudentFullName { get; set; }
 
-    public static MarkListViewModel FromMark(Mark mark)
+    public static MarkDetailsViewModel FromMark(Mark mark)
     {
-        var markListViewModel = new MarkListViewModel
+        var markDetailsViewModel = new MarkDetailsViewModel
         {
             Id = mark.Id,
             Score = mark.Score,
@@ -29,6 +29,6 @@ public class MarkListViewModel
             StudentFullName = $"{mark.Student.FirstName} {mark.Student.LastName}",
         };
 
-        return markListViewModel;
+        return markDetailsViewModel;
     }
 }

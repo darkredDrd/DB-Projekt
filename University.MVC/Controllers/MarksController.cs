@@ -1,26 +1,24 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 using University.Models;
-using University.MVC.Models.Marks;
-using University.MVC.Models.Students;
+using University.MVC.ViewModels.Marks;
 using University.Persistence;
 
 namespace University.MVC.Controllers
 {
-    public class MarkController : Controller
+    public class MarksController : Controller
     {
         private readonly UniversityContext context;
 
-        public MarkController(UniversityContext context)
+        public MarksController(UniversityContext context)
         {
             this.context = context;
         }
-        // GET: MarkController
+        // GET: MarksController
         public async Task<ActionResult> Index()
         {
-            var marks = await context.Mark
+            var marks = await context.Marks
                 .Include(mark => mark.Course)
                 .Include(mark => mark.Teacher)
                 .Include(mark => mark.Student)
@@ -31,13 +29,21 @@ namespace University.MVC.Controllers
             return View(markListViewModels);
         }
 
-        // GET: MarkController/Details/5
-        public ActionResult Details(int id)
+        // GET: MarksController/Details/5
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+            var mark = await context.Marks
+                .Include(mark => mark.Course)
+                .Include(mark => mark.Teacher)
+                .Include(mark => mark.Student)
+                .FirstOrDefaultAsync(mark => mark.Id == id);
+
+            var markDetailsViewModel = MarkDetailsViewModel.FromMark(mark);
+
+            return View(markDetailsViewModel);
         }
 
-        // GET: MarkController/Create
+        // GET: MarksController/Create
         public async Task<ActionResult> Create()
         {
             var allCourses = await context.Courses.ToListAsync();
@@ -49,7 +55,7 @@ namespace University.MVC.Controllers
             return View(markCreateViewModel);
         }
 
-        // POST: MarkController/Create
+        // POST: MarksController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(MarkCreateViewModel markCreateViewModel)
@@ -92,14 +98,14 @@ namespace University.MVC.Controllers
             return View(markCreateViewModel);
         }
 
-        // GET: MarkController/Edit/5
+        // GET: MarksController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
             var allCourses = await context.Courses.ToListAsync();
             var allStudents = await context.Students.ToListAsync();
             var allTeachers = await context.Teachers.ToListAsync();
 
-            var mark = await context.Mark
+            var mark = await context.Marks
                 .Include(mark => mark.Course)
                 .Include(mark => mark.Teacher)
                 .Include(mark => mark.Student)
@@ -110,14 +116,14 @@ namespace University.MVC.Controllers
             return View(markUpdateViewModel);
         }
 
-        // POST: MarkController/Edit/5
+        // POST: MarksController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(int id, MarkUpdateViewModel markUpdateViewModel)
         {
             if (ModelState.IsValid)
             {
-                var existingMark = await context.Mark
+                var existingMark = await context.Marks
                     .Include(mark => mark.Course)
                     .Include(mark => mark.Teacher)
                     .Include(mark => mark.Student)
@@ -155,25 +161,33 @@ namespace University.MVC.Controllers
             return View(markUpdateViewModel);
         }
 
-        // GET: MarkController/Delete/5
-        public ActionResult Delete(int id)
+        // GET: MarksController/Delete/5
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            var mark = await context.Marks
+                .Include(mark => mark.Course)
+                .Include(mark => mark.Teacher)
+                .Include(mark => mark.Student)
+                .FirstOrDefaultAsync(mark => mark.Id == id);
+
+            var markDetailsViewModel = MarkDetailsViewModel.FromMark(mark);
+
+            return View(markDetailsViewModel);
         }
 
-        // POST: MarkController/Delete/5
-        [HttpPost]
+        // POST: MarksController/Delete/5
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            try
+            var mark = await context.Marks.FindAsync(id);
+            if (mark != null)
             {
-                return RedirectToAction(nameof(Index));
+                context.Marks.Remove(mark);
             }
-            catch
-            {
-                return View();
-            }
+
+            await context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }
