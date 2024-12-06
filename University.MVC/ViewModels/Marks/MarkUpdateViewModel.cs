@@ -2,6 +2,7 @@
 
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+using University.Application.Marks;
 using University.Models;
 
 namespace University.MVC.ViewModels.Marks
@@ -68,5 +69,20 @@ namespace University.MVC.ViewModels.Marks
 
         [Required]
         public int StudentId { get; set; }
+
+        public UpdateMarkCommand ToCommand()
+        {
+            var updateMarkCommand = new UpdateMarkCommand
+            {
+                Id = this.Id,
+                CourseId = this.CourseId,
+                DateAwarded = this.DateAwarded,
+                Score = this.Score,
+                StudentId = this.StudentId,
+                TeacherId = this.TeacherId
+            };
+
+            return updateMarkCommand;
+        }
     }
 }

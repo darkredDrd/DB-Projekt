@@ -1,3 +1,4 @@
+using University.Application.Marks;
 using University.Persistence;
 
 namespace University.MVC
@@ -11,6 +12,9 @@ namespace University.MVC
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<UniversityContext>();
+
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreateMarkCommand>());
+
 
             var app = builder.Build();
 

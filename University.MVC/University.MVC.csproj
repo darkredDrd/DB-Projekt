@@ -6,6 +6,7 @@
   </PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="MediatR" Version="12.4.1" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.11">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -22,6 +23,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\University.Application\University.Application.csproj" />
 	  <ProjectReference Include="..\University.Models\University.Models.csproj" />
 	  <ProjectReference Include="..\University.Persistence\University.Persistence.csproj" />
 	</ItemGroup>

@@ -1,28 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using MediatR;
 
-using University.Models;
+using Microsoft.AspNetCore.Mvc;
+
+using University.Application.Marks;
 using University.MVC.ViewModels.Marks;
-using University.Persistence;
 
 namespace University.MVC.Controllers
 {
     public class MarksController : Controller
     {
-        private readonly UniversityContext context;
+        private readonly IMediator mediator;
 
-        public MarksController(UniversityContext context)
+        public MarksController(IMediator mediator)
         {
-            this.context = context;
+            this.mediator = mediator;
         }
+
         // GET: MarksController
         public async Task<ActionResult> Index()
         {
-            var marks = await context.Marks
-                .Include(mark => mark.Course)
-                .Include(mark => mark.Teacher)
-                .Include(mark => mark.Student)
-                .ToListAsync();
+            var getMarksListQuery = new GetMarksListQuery();
+            var marks = await mediator.Send(getMarksListQuery);
 
             var markListViewModels = marks.Select(MarkListViewModel.FromMark);
 
@@ -32,11 +30,8 @@ namespace University.MVC.Controllers
         // GET: MarksController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            var mark = await context.Marks
-                .Include(mark => mark.Course)
-                .Include(mark => mark.Teacher)
-                .Include(mark => mark.Student)
-                .FirstOrDefaultAsync(mark => mark.Id == id);
+            var getMarkQuery = new GetMarkQuery { Id = id };
+            var mark = await mediator.Send(getMarkQuery);
 
             var markDetailsViewModel = MarkDetailsViewModel.FromMark(mark);
 
@@ -46,11 +41,10 @@ namespace University.MVC.Controllers
         // GET: MarksController/Create
         public async Task<ActionResult> Create()
         {
-            var allCourses = await context.Courses.ToListAsync();
-            var allStudents = await context.Students.ToListAsync();
-            var allTeachers = await context.Teachers.ToListAsync();
+            var getMarkReferencesQuery = new GetMarkReferencesQuery();
+            var markReferences = await this.mediator.Send(getMarkReferencesQuery);
 
-            var markCreateViewModel = new MarkCreateViewModel(allCourses, allTeachers, allStudents);
+            var markCreateViewModel = new MarkCreateViewModel(markReferences.Courses, markReferences.Teachers, markReferences.Students);
 
             return View(markCreateViewModel);
         }
@@ -62,35 +56,9 @@ namespace University.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var course = await context.Courses.FirstOrDefaultAsync(m => m.Id == markCreateViewModel.CourseId);
-                if (course == null)
-                {
-                    return NotFound();
-                }
-
-                var teacher = await context.Teachers.FirstOrDefaultAsync(m => m.Id == markCreateViewModel.TeacherId);
-                if (teacher == null)
-                {
-                    return NotFound();
-                }
-
-                var student = await context.Students.FirstOrDefaultAsync(m => m.Id == markCreateViewModel.StudentId);
-                if (student == null)
-                {
-                    return NotFound();
-                }
-
-                var mark = new Mark
-                {
-                    Score = markCreateViewModel.Score,
-                    DateAwarded = markCreateViewModel.DateAwarded,
-                    Course = course,
-                    Teacher = teacher,
-                    Student = student
-                };
-
-                context.Add(mark);
-                await context.SaveChangesAsync();
+                var createMarkCommand = markCreateViewModel.ToCommand();
+                
+                await mediator.Send(createMarkCommand);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -101,17 +69,13 @@ namespace University.MVC.Controllers
         // GET: MarksController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
-            var allCourses = await context.Courses.ToListAsync();
-            var allStudents = await context.Students.ToListAsync();
-            var allTeachers = await context.Teachers.ToListAsync();
+            var getMarkReferencesQuery = new GetMarkReferencesQuery();
+            var markReferences = await this.mediator.Send(getMarkReferencesQuery);
 
-            var mark = await context.Marks
-                .Include(mark => mark.Course)
-                .Include(mark => mark.Teacher)
-                .Include(mark => mark.Student)
-                .FirstOrDefaultAsync(mark => mark.Id == id);
+            var getMarkQuery = new GetMarkQuery { Id = id };
+            var mark = await mediator.Send(getMarkQuery);
 
-            var markUpdateViewModel = new MarkUpdateViewModel(mark, allCourses, allTeachers, allStudents);
+            var markUpdateViewModel = new MarkUpdateViewModel(mark, markReferences.Courses, markReferences.Teachers, markReferences.Students);
 
             return View(markUpdateViewModel);
         }
@@ -123,37 +87,9 @@ namespace University.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var existingMark = await context.Marks
-                    .Include(mark => mark.Course)
-                    .Include(mark => mark.Teacher)
-                    .Include(mark => mark.Student)
-                    .FirstOrDefaultAsync(mark => mark.Id == id);
+                var updateMarkCommand = markUpdateViewModel.ToCommand();
 
-                var course = await context.Courses.FirstOrDefaultAsync(m => m.Id == markUpdateViewModel.CourseId);
-                if (course == null)
-                {
-                    return NotFound();
-                }
-
-                var teacher = await context.Teachers.FirstOrDefaultAsync(m => m.Id == markUpdateViewModel.TeacherId);
-                if (teacher == null)
-                {
-                    return NotFound();
-                }
-
-                var student = await context.Students.FirstOrDefaultAsync(m => m.Id == markUpdateViewModel.StudentId);
-                if (student == null)
-                {
-                    return NotFound();
-                }
-
-                existingMark.Score = markUpdateViewModel.Score;
-                existingMark.DateAwarded = markUpdateViewModel.DateAwarded;
-                existingMark.Course = course;
-                existingMark.Teacher = teacher;
-                existingMark.Student = student;
-
-                await context.SaveChangesAsync();
+                await mediator.Send(updateMarkCommand);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -164,11 +100,8 @@ namespace University.MVC.Controllers
         // GET: MarksController/Delete/5
         public async Task<ActionResult> Delete(int id)
         {
-            var mark = await context.Marks
-                .Include(mark => mark.Course)
-                .Include(mark => mark.Teacher)
-                .Include(mark => mark.Student)
-                .FirstOrDefaultAsync(mark => mark.Id == id);
+            var getMarkQuery = new GetMarkQuery { Id = id };
+            var mark = await mediator.Send(getMarkQuery);
 
             var markDetailsViewModel = MarkDetailsViewModel.FromMark(mark);
 
@@ -180,13 +113,10 @@ namespace University.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var mark = await context.Marks.FindAsync(id);
-            if (mark != null)
-            {
-                context.Marks.Remove(mark);
-            }
+            var deleteMarkCommand = new DeleteMarkCommand { Id = id };
 
-            await context.SaveChangesAsync();
+            await mediator.Send(deleteMarkCommand);
+            
             return RedirectToAction(nameof(Index));
         }
     }
