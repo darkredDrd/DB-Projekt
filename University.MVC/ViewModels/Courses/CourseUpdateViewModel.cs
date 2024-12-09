@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+using University.Application.Courses;
 using University.Models;
 
 namespace University.MVC.ViewModels.Courses;
@@ -25,10 +26,9 @@ public class CourseUpdateViewModel
     public List<Checkbox> StudentCheckboxes { get; set; } = new();
     public List<Checkbox> TeacherCheckboxes { get; set; } = new();
 
-
-    public Course ToCourse()
+    public UpdateCourseCommand ToUpdateCourseCommand()
     {
-        var course = new Course
+        var updateCourseCommand = new UpdateCourseCommand
         {
             Id = this.Id,
             Topic = this.Topic,
@@ -37,8 +37,23 @@ public class CourseUpdateViewModel
             EndDate = this.EndDate,
         };
 
-        return course;
+        updateCourseCommand.StudentAssignments = this.StudentCheckboxes.Select(
+            checkbox => new Assignment
+            {
+                Assigned = checkbox.Checked,
+                AssigneeId = checkbox.Id
+            }).ToList();
+
+        updateCourseCommand.TeacherAssignments = this.TeacherCheckboxes.Select(
+            checkbox => new Assignment
+            {
+                Assigned = checkbox.Checked,
+                AssigneeId = checkbox.Id
+            }).ToList();
+
+        return updateCourseCommand;
     }
+
 
     public static CourseUpdateViewModel FromCourse(Course course, List<Student> allStudents, List<Teacher> allTeachers)
     {

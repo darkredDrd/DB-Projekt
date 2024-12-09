@@ -1,24 +1,27 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using MediatR;
 
+using Microsoft.AspNetCore.Mvc;
+
+using University.Application.Courses;
+using University.Application.Marks;
 using University.MVC.ViewModels.Courses;
-using University.Persistence;
 
 namespace University.MVC.Controllers
 {
     public class CoursesController : Controller
     {
-        private readonly UniversityContext context;
+        private readonly IMediator mediator;
 
-        public CoursesController(UniversityContext context)
+        public CoursesController(IMediator mediator)
         {
-            this.context = context;
+            this.mediator = mediator;
         }
 
         // GET: Courses
         public async Task<IActionResult> Index()
         {
-            var courses = await context.Courses.ToListAsync();
+            var getCoursesQuery = new GetCoursesQuery();
+            var courses = await mediator.Send(getCoursesQuery);
 
             var courseListViewModels = courses.Select(CourseListViewModel.FromCourse).ToList();
 
@@ -33,8 +36,9 @@ namespace University.MVC.Controllers
                 return NotFound();
             }
 
-            var course = await context.Courses
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var getCourseQuery = new GetCourseQuery { Id = id.Value };
+
+            var course = await this.mediator.Send(getCourseQuery);
             if (course == null)
             {
                 return NotFound();
@@ -60,10 +64,8 @@ namespace University.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var course = courseCreateViewModel.ToCourse();
-
-                context.Add(course);
-                await context.SaveChangesAsync();
+                var createCourseCommand = courseCreateViewModel.ToCreateCourseCommand();
+                await this.mediator.Send(createCourseCommand);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -78,21 +80,18 @@ namespace University.MVC.Controllers
                 return NotFound();
             }
 
-            var allStudents = await context.Students.ToListAsync();
-            var allTeachers = await context.Teachers.ToListAsync();
+            var getCourseReferencesQuery = new GetCourseReferencesQuery();
+            var courseReferences = await this.mediator.Send(getCourseReferencesQuery);
 
-
-            var course = await context.Courses
-                .Include(course => course.Students)
-                .Include(course => course.Teachers)
-                .FirstOrDefaultAsync(course => course.Id == id);
+            var getCourseQuery = new GetCourseQuery { Id = id.Value };
+            var course = await this.mediator.Send(getCourseQuery);
 
             if (course == null)
             {
                 return NotFound();
             }
 
-            var courseUpdateViewModel = CourseUpdateViewModel.FromCourse(course, allStudents, allTeachers);
+            var courseUpdateViewModel = CourseUpdateViewModel.FromCourse(course, courseReferences.Students, courseReferences.Teachers);
             return View(courseUpdateViewModel);
         }
 
@@ -110,66 +109,10 @@ namespace University.MVC.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    var existingCourse = await context.Courses
-                        .Include(course => course.Students).Include(course => course.Teachers)
-                        .FirstOrDefaultAsync(course => course.Id == id);
+                var updateCourseCommand = courseUpdateViewModel.ToUpdateCourseCommand();
+                await this.mediator.Send(updateCourseCommand);
 
-                    existingCourse.Topic = courseUpdateViewModel.Topic;
-                    existingCourse.NumberOfHours = courseUpdateViewModel.NumberOfHours;
-                    existingCourse.StartDate = courseUpdateViewModel.StartDate;
-                    existingCourse.EndDate = courseUpdateViewModel.EndDate;
-
-                    foreach (var studentCheckbox in courseUpdateViewModel.StudentCheckboxes)
-                    {
-                        var existingStudentInACourse = existingCourse.Students.FirstOrDefault(student => student.Id == studentCheckbox.Id);
-
-                        if (existingStudentInACourse == null && studentCheckbox.Checked)
-                        {
-                            // Add a student to a course
-                            var newStudent = await context.Students.FirstOrDefaultAsync(m => m.Id == studentCheckbox.Id);
-                            existingCourse.Students.Add(newStudent);
-                        }
-
-                        if (existingStudentInACourse != null && !studentCheckbox.Checked)
-                        {
-                            // Remove a student from a course
-                            existingCourse.Students.Remove(existingStudentInACourse);
-                        }
-                    }
-
-                    foreach (var teacherCheckbox in courseUpdateViewModel.TeacherCheckboxes)
-                    {
-                        var existingTeacherInACourse = existingCourse.Teachers.FirstOrDefault(teacher => teacher.Id == teacherCheckbox.Id);
-
-                        if (existingTeacherInACourse == null && teacherCheckbox.Checked)
-                        {
-                            // Add a teacher to a course
-                            var newTeacher = await context.Teachers.FirstOrDefaultAsync(m => m.Id == teacherCheckbox.Id);
-                            existingCourse.Teachers.Add(newTeacher);
-                        }
-
-                        if (existingTeacherInACourse != null && !teacherCheckbox.Checked)
-                        {
-                            // Remove a teacher from a course
-                            existingCourse.Teachers.Remove(existingTeacherInACourse);
-                        }
-                    }
-
-                    await context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CourseExists(id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+              
                 return RedirectToAction(nameof(Index));
             }
             return View(courseUpdateViewModel);
@@ -183,8 +126,9 @@ namespace University.MVC.Controllers
                 return NotFound();
             }
 
-            var course = await context.Courses
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var getCourseQuery = new GetCourseQuery { Id = id.Value };
+
+            var course = await this.mediator.Send(getCourseQuery);
             if (course == null)
             {
                 return NotFound();
@@ -200,19 +144,10 @@ namespace University.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var course = await context.Courses.FindAsync(id);
-            if (course != null)
-            {
-                context.Courses.Remove(course);
-            }
+            var deleteCourseCommand = new DeleteCourseCommand();
+            await this.mediator.Send(deleteCourseCommand);
 
-            await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool CourseExists(int id)
-        {
-            return context.Courses.Any(e => e.Id == id);
         }
     }
 }

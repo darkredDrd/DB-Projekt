@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+using University.Application.Courses;
 using University.Models;
 
 namespace University.MVC.ViewModels.Courses;
@@ -17,9 +18,9 @@ public class CourseCreateViewModel
     [Display(Name = "End date")]
     public DateTime EndDate { get; set; }
 
-    public Course ToCourse()
+    public CreateCourseCommand ToCreateCourseCommand()
     {
-        var course = new Course
+        var createCourseCommand = new CreateCourseCommand
         {
             Topic = this.Topic,
             NumberOfHours = this.NumberOfHours,
@@ -27,6 +28,6 @@ public class CourseCreateViewModel
             EndDate = this.EndDate,
         };
 
-        return course;
+        return createCourseCommand;
     }
 }
