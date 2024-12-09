@@ -9,11 +9,21 @@ public class MongoDbStudent
 
     public static MongoDbStudent FromStudent(Student student)
     {
-        return new MongoDbStudent
+
+        var mongoDbStudent = new MongoDbStudent
         {
             FullName = $"{student.FirstName} {student.LastName}",
-            Birthday = student.Birthday,
-            Courses = student.Courses.Select(course => MongoDbCourse.FromCourse(student, course)).ToList()
+            Birthday = student.Birthday
         };
+
+        var courseGroups = student.Marks.GroupBy(mark => mark.Course);
+        mongoDbStudent.Courses = courseGroups.Select(courseGroup => new MongoDbCourse
+        {
+            Topic = courseGroup.Key.Topic,
+            TotalScore = courseGroup.Sum(mark => mark.Score),
+            Marks = courseGroup.Select(MongoDbMark.FromMark).ToList()
+        }).ToList();
+
+        return mongoDbStudent;
     }
 }

@@ -24,8 +24,8 @@ public class GenerateReportCommandHandler : IRequestHandler<GenerateReportComman
     public async Task Handle(GenerateReportCommand request, CancellationToken cancellationToken)
     {
         var students = await context.Students
-            .Include(student => student.Courses)
-            .ThenInclude(course => course.Marks)
+            .Include(student => student.Marks)
+            .ThenInclude(mark => mark.Course)
             .Include(student => student.Marks)
             .ThenInclude(mark => mark.Teacher)
             .ToListAsync(cancellationToken);
