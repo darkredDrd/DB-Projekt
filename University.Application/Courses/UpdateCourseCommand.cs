@@ -33,10 +33,3 @@ public class UpdateCourseCommand : IRequest
         return course;
     }
 }
-
-public class Assignment
-{
-    public int AssigneeId { get; set; }
-
-    public bool Assigned { get; set; }
-}

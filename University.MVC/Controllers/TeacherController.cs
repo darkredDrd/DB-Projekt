@@ -1,24 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using MediatR;
 
+using Microsoft.AspNetCore.Mvc;
+
+using University.Application.Teachers;
 using University.MVC.ViewModels.Teachers;
-using University.Persistence;
 
 namespace University.MVC.Controllers
 {
     public class TeachersController : Controller
     {
-        private readonly UniversityContext context;
+        private readonly IMediator mediator;
 
-        public TeachersController(UniversityContext context)
+        public TeachersController(IMediator mediator)
         {
-            this.context = context;
+            this.mediator = mediator;
         }
 
         // GET: Teachers
         public async Task<IActionResult> Index()
         {
-            var teachers = await context.Teachers.ToListAsync();
+            var getTeachersQuery = new GetTeachersQuery();
+            var teachers = await this.mediator.Send(getTeachersQuery);
 
             var teacherListViewModels = teachers.Select(TeacherListViewModel.FromTeacher).ToList();
 
@@ -33,8 +35,9 @@ namespace University.MVC.Controllers
                 return NotFound();
             }
 
-            var teacher = await context.Teachers
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var getTeacherQuery = new GetTeacherQuery { Id = id.Value };
+            var teacher = await this.mediator.Send(getTeacherQuery);
+
             if (teacher == null)
             {
                 return NotFound();
@@ -60,10 +63,8 @@ namespace University.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var teacher = teacherCreateViewModel.ToTeacher();
-
-                context.Add(teacher);
-                await context.SaveChangesAsync();
+                var createTeacherCommand = teacherCreateViewModel.ToCreateTeacherCommand();
+                await mediator.Send(createTeacherCommand);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -78,11 +79,8 @@ namespace University.MVC.Controllers
                 return NotFound();
             }
 
-            var teacher = await context.Teachers.FindAsync(id);
-            if (teacher == null)
-            {
-                return NotFound();
-            }
+            var getTeacherQuery = new GetTeacherQuery { Id = id.Value };
+            var teacher = await this.mediator.Send(getTeacherQuery);
 
             var teacherUpdateViewModel = TeacherUpdateViewModel.FromTeacher(teacher);
             return View(teacherUpdateViewModel);
@@ -102,23 +100,9 @@ namespace University.MVC.Controllers
 
             if (ModelState.IsValid)
             {
-                var teacher = teacherUpdateViewModel.ToTeacher();
-                try
-                {
-                    context.Update(teacher);
-                    await context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TeacherExists(teacher.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                var updateTeacherCommand = teacherUpdateViewModel.ToUpdateTeacherCommand();
+                await this.mediator.Send(updateTeacherCommand);
+
                 return RedirectToAction(nameof(Index));
             }
             return View(teacherUpdateViewModel);
@@ -132,8 +116,8 @@ namespace University.MVC.Controllers
                 return NotFound();
             }
 
-            var teacher = await context.Teachers
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var getTeacherQuery = new GetTeacherQuery { Id = id.Value };
+            var teacher = await this.mediator.Send(getTeacherQuery);
             if (teacher == null)
             {
                 return NotFound();
@@ -149,19 +133,10 @@ namespace University.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var teacher = await context.Teachers.FindAsync(id);
-            if (teacher != null)
-            {
-                context.Teachers.Remove(teacher);
-            }
+            var deleteTeacherCommand = new DeleteTeacherCommand();
+            await this.mediator.Send(deleteTeacherCommand);
 
-            await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool TeacherExists(int id)
-        {
-            return context.Teachers.Any(e => e.Id == id);
         }
     }
 }

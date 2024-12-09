@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 using University.Application.Courses;
-using University.Models;
 
 namespace University.MVC.ViewModels.Courses;
 

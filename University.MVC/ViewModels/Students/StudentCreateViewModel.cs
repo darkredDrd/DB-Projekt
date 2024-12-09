@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using University.Models;
+using University.Application.Students;
 
 namespace University.MVC.ViewModels.Students
 {
@@ -30,9 +30,9 @@ namespace University.MVC.ViewModels.Students
 
         public DateTime? Birthday { get; set; }
 
-        public Student ToStudent()
+        public CreateStudentCommand ToCreateStudentCommand()
         {
-            var student = new Student
+            var createStudentCommand = new CreateStudentCommand
             {
                 PassportNumber = this.PassportNumber,
                 Email = this.Email,
@@ -42,7 +42,7 @@ namespace University.MVC.ViewModels.Students
                 Birthday = this.Birthday
             };
 
-            return student;
+            return createStudentCommand;
         }
     }
 }

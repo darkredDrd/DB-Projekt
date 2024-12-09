@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+using University.Application.Teachers;
 using University.Models;
 
 namespace University.MVC.ViewModels.Teachers;
@@ -33,9 +34,9 @@ public class TeacherUpdateViewModel
 
     public DateTime? Birthday { get; set; }
 
-    public Teacher ToTeacher()
+    public UpdateTeacherCommand ToUpdateTeacherCommand()
     {
-        var teacher = new Teacher
+        var updateTeacherCommand = new UpdateTeacherCommand
         {
             Id = this.Id,
             PassportNumber = this.PassportNumber,
@@ -46,7 +47,7 @@ public class TeacherUpdateViewModel
             Birthday = this.Birthday
         };
 
-        return teacher;
+        return updateTeacherCommand;
     }
 
     public static TeacherUpdateViewModel FromTeacher(Teacher teacher)
