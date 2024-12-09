@@ -3,7 +3,6 @@
 using Microsoft.AspNetCore.Mvc;
 
 using University.Application.Reports;
-using University.MVC.ViewModels.Reports;
 
 namespace University.MVC.Controllers
 {
@@ -16,14 +15,21 @@ namespace University.MVC.Controllers
             this.mediator = mediator;
         }
 
-       public async Task<IActionResult> Index()
+        [HttpPost("generate-report")]
+        public async Task<IActionResult> GenerateReport()
         {
-            var getReportQuery = new GetReportQuery();
-            var report = await this.mediator.Send(getReportQuery);
+            var generateReportCommand = new GenerateReportCommand();
+            await mediator.Send(generateReportCommand);
 
-            var reportListViewModel = ReportListViewModel.FromReport(report);
-            
-            return View(reportListViewModel);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var getReportsQuery = new GetReportsQuery();
+            var reports = await this.mediator.Send(getReportsQuery);
+
+            return View(reports);
         }
     }
 }

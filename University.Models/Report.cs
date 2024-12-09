@@ -1,6 +1,4 @@
 ﻿
-using System.Runtime.InteropServices.JavaScript;
-
 namespace University.Models
 {
     public class Report

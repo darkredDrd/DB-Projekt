@@ -1,33 +1,25 @@
 ﻿using MediatR;
 
-using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
 
-using University.Models;
-using University.Persistence;
+using University.Models.Reports;
 
 namespace University.Application.Reports;
 
-public class GetReportQueryHandler : IRequestHandler<GetReportQuery, Report>
+public class GetReportsQueryHandler : IRequestHandler<GetReportsQuery, List<MongoDbReport>>
 {
-    private readonly UniversityContext context;
+    private readonly MongoDatabaseBase mongoDatabase;
 
-    public GetReportQueryHandler(UniversityContext context)
+
+    public GetReportsQueryHandler(MongoDatabaseBase mongoDatabase)
     {
-        this.context = context;
+        this.mongoDatabase = mongoDatabase;
     }
 
-    public async Task<Report> Handle(GetReportQuery request, CancellationToken cancellationToken)
+    public async Task<List<MongoDbReport>> Handle(GetReportsQuery request, CancellationToken cancellationToken)
     {
-        var students = await context.Students
-            .Include(student => student.Courses)
-            .Include(student => student.Marks)
-            .ThenInclude(mark => mark.Teacher)
-            .ToListAsync(cancellationToken);
+        var reportCollection = mongoDatabase.GetCollection<MongoDbReport>("reports");
 
-        return new Report
-        {
-            GeneratedDate = DateTime.UtcNow,
-            Students = students
-        };
+        return await reportCollection.AsQueryable().ToListAsync(cancellationToken);
     }
 }

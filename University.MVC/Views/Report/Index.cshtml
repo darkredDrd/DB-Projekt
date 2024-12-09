@@ -1,4 +1,5 @@
-﻿@model University.MVC.ViewModels.Reports.ReportListViewModel
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<University.Models.Reports.MongoDbReport>
 
 @{
     ViewData["Title"] = "Index";
@@ -6,75 +7,84 @@
 
 <h1>Report</h1>
 
-<div>
+<form asp-action="GenerateReport">
+    <div class="form-group">
+        <input type="submit" value="GENERATE REPORT !!!" class="btn btn-primary" />
+    </div>
+</form>
 
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.GeneratedDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GeneratedDate)
-        </dd>
-    </dl>
-    <h4>Students:</h4>
-    @foreach (var student in Model.Students)
-    {    
-        <hr />
+@foreach (var report in Model)
+{
+    <div>
         <dl class="row">
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => student.FullName):
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => report.GeneratedDate)
             </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => student.FullName):
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => student.Birthday)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => student.Birthday)
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => report.GeneratedDate)
             </dd>
         </dl>
-        <h5>Courses:</h5>
-        @foreach (var course in student.Courses)
-        {    
+        <h4>Students:</h4>
+        @foreach (var student in report.Students)
+        {
+            <hr />
             <dl class="row">
-                <dt class = "col-sm-2">
-                    @Html.DisplayNameFor(model => course.Topic):
-                </dt>
-                <dd class = "col-sm-10">
-                    @Html.DisplayFor(model => course.Topic)
-                </dd>
                 <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => course.TotalScore):
+                    @Html.DisplayNameFor(model => student.FullName):
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => course.TotalScore)
+                    @Html.DisplayFor(model => student.FullName):
                 </dd>
-                <h6>Marks:</h6>
-                @foreach (var mark in course.Marks)
-                {
-                    <dl class="row">
-                        <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => mark.Score):
-                        </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => mark.Score):
-                        </dd>
-                        <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => mark.DateAwarded):
-                        </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => mark.DateAwarded)
-                        </dd>
-                        <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => mark.TeacherName):
-                        </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => mark.TeacherName)
-                        </dd>
-                    </dl>
-                }
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => student.Birthday)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => student.Birthday)
+                </dd>
             </dl>
+            <h5>Courses:</h5>
+            @foreach (var course in student.Courses)
+            {
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => course.Topic):
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => course.Topic)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => course.TotalScore):
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => course.TotalScore)
+                    </dd>
+                    <h6>Marks:</h6>
+                    @foreach (var mark in course.Marks)
+                    {
+                        <dl class="row">
+                            <dt class="col-sm-2">
+                                @Html.DisplayNameFor(model => mark.Score):
+                            </dt>
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => mark.Score):
+                            </dd>
+                            <dt class="col-sm-2">
+                                @Html.DisplayNameFor(model => mark.DateAwarded):
+                            </dt>
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => mark.DateAwarded)
+                            </dd>
+                            <dt class="col-sm-2">
+                                @Html.DisplayNameFor(model => mark.TeacherName):
+                            </dt>
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => mark.TeacherName)
+                            </dd>
+                        </dl>
+                    }
+                </dl>
+            }
         }
-    }
-</div>
+    </div>
+
+}

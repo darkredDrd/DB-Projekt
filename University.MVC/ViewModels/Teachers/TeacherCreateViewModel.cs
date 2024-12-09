@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 using University.Application.Teachers;
-using University.Models;
 
 namespace University.MVC.ViewModels.Teachers
 {

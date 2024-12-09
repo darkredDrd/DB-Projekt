@@ -1,16 +1,14 @@
-﻿using University.Models;
+﻿namespace University.Models.Reports;
 
-namespace University.MVC.ViewModels.Reports;
-
-public class MarkReportViewModel
+public class MongoDbMark
 {
     public int Score { get; set; }
     public DateTime DateAwarded { get; set; }
     public string TeacherName { get; set; }
 
-    public static MarkReportViewModel FromMark(Mark mark)
+    public static MongoDbMark FromMark(Mark mark)
     {
-        return new MarkReportViewModel
+        return new MongoDbMark
         {
             Score = mark.Score,
             DateAwarded = mark.DateAwarded,

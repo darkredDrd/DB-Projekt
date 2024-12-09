@@ -1,3 +1,7 @@
+using Microsoft.Extensions.Options;
+
+using MongoDB.Driver;
+
 using University.Application.Marks;
 using University.Persistence;
 
@@ -14,6 +18,17 @@ namespace University.MVC
             builder.Services.AddDbContext<UniversityContext>();
 
             builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreateMarkCommand>());
+
+            builder.Services.Configure<MongoDbSettings>(mongoDbSettings => builder.Configuration.GetSection("MongoDbSettings").Bind(mongoDbSettings));
+
+            builder.Services.AddScoped<MongoDatabaseBase>(serviceProvider =>
+            {
+                var mongoDbSettings = serviceProvider.GetService<IOptions<MongoDbSettings>>().Value;
+                var client = new MongoClient(mongoDbSettings.ConnectionString);
+                var mongoDatabase = client.GetDatabase(mongoDbSettings.UniversityDbName) as MongoDatabaseBase;
+
+                return mongoDatabase;
+            });
 
 
             var app = builder.Build();
