@@ -133,7 +133,7 @@ namespace University.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var deleteTeacherCommand = new DeleteTeacherCommand();
+            var deleteTeacherCommand = new DeleteTeacherCommand { Id = id };
             await this.mediator.Send(deleteTeacherCommand);
 
             return RedirectToAction(nameof(Index));

@@ -144,7 +144,7 @@ namespace University.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var deleteCourseCommand = new DeleteCourseCommand();
+            var deleteCourseCommand = new DeleteCourseCommand { Id = id };
             await this.mediator.Send(deleteCourseCommand);
 
             return RedirectToAction(nameof(Index));
