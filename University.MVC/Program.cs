@@ -3,6 +3,8 @@ using Microsoft.Extensions.Options;
 
 using MongoDB.Driver;
 
+using StackExchange.Redis;
+
 using University.Application.Marks;
 using University.Persistence;
 
@@ -31,6 +33,20 @@ namespace University.MVC
 
                 return mongoDatabase;
             });
+
+            builder.Services.AddStackExchangeRedisCache(
+                redisCacheOptions =>
+                {
+                    var redisSettings = builder.Configuration.GetSection("RedisSettings").Get<RedisSettings>();
+                    redisCacheOptions.ConfigurationOptions = new ConfigurationOptions
+                    {
+                        AllowAdmin = true,
+                        DefaultDatabase = 0,
+                        Ssl = false,
+                        Password = redisSettings.Password,
+                        EndPoints = { { redisSettings.Host, redisSettings.Port } }
+                    };
+                });
 
 
             var app = builder.Build();
