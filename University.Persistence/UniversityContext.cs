@@ -7,10 +7,11 @@ namespace University.Persistence
 {
     public class UniversityContext : DbContext
     {
-        public UniversityContext()
+        public UniversityContext(DbContextOptions options) : base(options)
         {
             this.Database.EnsureCreated();
         }
+
         public DbSet<Student> Students { get; set; }
 
         public DbSet<Course> Courses { get; set; }
@@ -19,12 +20,6 @@ namespace University.Persistence
 
         public DbSet<Mark> Marks { get; set; }
         
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(
-                @"Server=localhost;Database=University-EF;Trusted_Connection=True;ConnectRetryCount=0;TrustServerCertificate=True;");
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new StudentConfiguration());

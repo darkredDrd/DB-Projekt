@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 using MongoDB.Driver;
@@ -15,13 +16,14 @@ namespace University.MVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddDbContext<UniversityContext>();
+            builder.Services.AddDbContext<UniversityContext>(
+                dbContextOptionsBuilder => dbContextOptionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("UniversityDb")));
 
             builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreateMarkCommand>());
 
             builder.Services.Configure<MongoDbSettings>(mongoDbSettings => builder.Configuration.GetSection("MongoDbSettings").Bind(mongoDbSettings));
 
-            builder.Services.AddScoped<MongoDatabaseBase>(serviceProvider =>
+            builder.Services.AddScoped(serviceProvider =>
             {
                 var mongoDbSettings = serviceProvider.GetService<IOptions<MongoDbSettings>>().Value;
                 var client = new MongoClient(mongoDbSettings.ConnectionString);
