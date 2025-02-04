@@ -6,6 +6,7 @@ namespace Cinema.Application.Actors;
 
 public class UpdateActorCommand : IRequest
 {
+    public int Id { get; set; }
     public string FirstName { get; set; }
 
     public string LastName { get; set; }
@@ -16,6 +17,7 @@ public class UpdateActorCommand : IRequest
     {
         var actor = new Actor
         {
+            Id = this.Id,
             FirstName = this.FirstName,
             LastName = this.LastName,
             BirthDate = this.BirthDate,

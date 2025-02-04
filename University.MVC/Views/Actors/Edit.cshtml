@@ -1,9 +1,9 @@
-﻿@model University.MVC.ViewModels.Students.StudentUpdateViewModel
+﻿@model Cinema.MVC.ViewModels.Actors.ActorUpdateViewModel
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h2>Update a student</h2>
+<h2>Update a actor</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -21,24 +21,9 @@
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PassportNumber" class="control-label"></label>
-                <input asp-for="PassportNumber" class="form-control" />
-                <span asp-validation-for="PassportNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Birthday" class="control-label"></label>
-                <input asp-for="Birthday" class="form-control" />
-                <span asp-validation-for="Birthday" class="text-danger"></span>
+                <label asp-for="BirthDate" class="control-label"></label>
+                <input asp-for="BirthDate" class="form-control" />
+                <span asp-validation-for="BirthDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
