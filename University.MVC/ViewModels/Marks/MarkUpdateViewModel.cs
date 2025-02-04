@@ -7,13 +7,13 @@ using University.Models;
 
 namespace University.MVC.ViewModels.Marks
 {
-    public class MarkUpdateViewModel
+    public class RevenueUpdateViewModel
     {
-        public MarkUpdateViewModel()
+        public RevenueUpdateViewModel()
         {
         }
 
-        public MarkUpdateViewModel(Hall mark, List<Cinema> courses, List<Movie> teachers,
+        public RevenueUpdateViewModel(Hall mark, List<Cinema> courses, List<Movie> teachers,
             List<Revenue> students)
         {
             this.Score = mark.Score;

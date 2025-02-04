@@ -18,7 +18,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\University.Models\University.Models.csproj" />
+	  <ProjectReference Include="..\University.Models\Cinema.Models.csproj" />
 	</ItemGroup>
 
 </Project>

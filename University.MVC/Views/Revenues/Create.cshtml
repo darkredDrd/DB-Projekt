@@ -1,0 +1,39 @@
+﻿@model Cinema.MVC.ViewModels.Revenues.RevenueCreateViewModel
+
+@{
+    ViewData["Title"] = "Create Revenue";
+}
+
+<h1>Create Revenue</h1>
+
+<h4>Revenue</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div class="form-group">
+                <label asp-for="ScreeningId">Select a Screening:</label>
+                <select asp-for="ScreeningId" class="form-control" asp-items="Model.Screenings"></select>
+                <option value="">--Select a Screening--</option>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalRevenue" class="control-label"></label>
+                <input asp-for="TotalRevenue" class="form-control" />
+                <span asp-validation-for="TotalRevenue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

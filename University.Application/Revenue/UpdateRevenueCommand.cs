@@ -10,5 +10,5 @@ public class UpdateRevenueCommand : IRequest
 
     public int ScreeningId { get; set; }
 
-    public float totalRevenue { get; set; }
+    public float TotalRevenue { get; set; }
 }

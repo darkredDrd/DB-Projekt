@@ -22,7 +22,7 @@ namespace University.MVC.Controllers
             var getMarksListQuery = new GetMarksListQuery();
             var marks = await mediator.Send(getMarksListQuery);
 
-            var markListViewModels = marks.Select(MarkListViewModel.FromMark);
+            var markListViewModels = marks.Select(RevenueListViewModel.FromMark);
 
             return View(markListViewModels);
         }
@@ -33,7 +33,7 @@ namespace University.MVC.Controllers
             var getMarkQuery = new GetMarkQuery { Id = id };
             var mark = await mediator.Send(getMarkQuery);
 
-            var markDetailsViewModel = MarkDetailsViewModel.FromMark(mark);
+            var markDetailsViewModel = RevenueDetailsViewModel.FromMark(mark);
 
             return View(markDetailsViewModel);
         }
@@ -52,7 +52,7 @@ namespace University.MVC.Controllers
         // POST: MarksController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(MarkCreateViewModel markCreateViewModel)
+        public async Task<ActionResult> Create(RevenueCreateViewModel markCreateViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace University.MVC.Controllers
         // POST: MarksController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(int id, MarkUpdateViewModel markUpdateViewModel)
+        public async Task<ActionResult> Edit(int id, RevenueUpdateViewModel markUpdateViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -103,7 +103,7 @@ namespace University.MVC.Controllers
             var getMarkQuery = new GetMarkQuery { Id = id };
             var mark = await mediator.Send(getMarkQuery);
 
-            var markDetailsViewModel = MarkDetailsViewModel.FromMark(mark);
+            var markDetailsViewModel = RevenueDetailsViewModel.FromMark(mark);
 
             return View(markDetailsViewModel);
         }
