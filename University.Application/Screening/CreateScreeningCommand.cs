@@ -1,10 +1,10 @@
 ﻿using MediatR;
 
-namespace Cinema.Application.Screening;
+namespace Cinema.Application.Screenings;
 
 public class CreateScreeningCommand : IRequest
 {
-    public string DateTime { get; set; }
+    public DateTime DateTime { get; set; }
     public int MovieID { get; set; }
     public int HallID { get; set; }
 

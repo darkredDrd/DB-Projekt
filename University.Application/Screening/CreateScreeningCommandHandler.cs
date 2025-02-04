@@ -4,9 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 using Cinema.Models;
 using Cinema.Persistence;
-using University.Application.Reports;
 
-namespace Cinema.Application.Screening;
+namespace Cinema.Application.Screenings;
 
 public class CreateScreeningCommandHandler : IRequestHandler<CreateScreeningCommand>
 {
@@ -19,16 +18,23 @@ public class CreateScreeningCommandHandler : IRequestHandler<CreateScreeningComm
 
     public async Task Handle(CreateScreeningCommand request, CancellationToken cancellationToken)
     {
-        var screening = await context.Screenings.FirstOrDefaultAsync(s => s.Id == request.ScreeningId, cancellationToken);
-        if (screening == null)
+        var movie = await context.Screenings.FirstOrDefaultAsync(s => s.Id == request.MovieID, cancellationToken);
+        if (movie == null)
         {
-            throw new NullReferenceException("Screening not found");
+            throw new NullReferenceException("Movie not found");
+        }
+
+        var hall = await context.Screenings.FirstOrDefaultAsync(s => s.Id == request.HallID, cancellationToken);
+        if (movie == null)
+        {
+            throw new NullReferenceException("Hall not found");
         }
 
         var screening = new Screening 
         {
-            Screening = screening,
-            TotalScreening = request.TotalScreening
+            DateTime = request.DateTime,
+            Movie = movie,
+            Hall = hall
         };
 
         context.Add(screening);
