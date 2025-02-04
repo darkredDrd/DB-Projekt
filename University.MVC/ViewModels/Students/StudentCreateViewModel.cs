@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+using Cinema.Application.Actor;
 using University.Application.Students;
 
 namespace University.MVC.ViewModels.Students

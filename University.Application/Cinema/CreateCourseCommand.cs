@@ -20,6 +20,7 @@ public class CreateCourseCommand : IRequest
         {
             Topic = this.Topic,
             NumberOfHours = this.NumberOfHours,
+
             StartDate = this.StartDate,
             EndDate = this.EndDate,
         };
