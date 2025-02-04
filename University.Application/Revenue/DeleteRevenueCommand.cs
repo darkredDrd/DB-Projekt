@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Cinema.Application.Students;
+namespace Cinema.Application.Revenues;
 
 public class DeleteRevenueCommand : IRequest
 {

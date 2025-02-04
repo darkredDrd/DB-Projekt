@@ -2,7 +2,7 @@
 
 using Cinema.Models;
 
-namespace Cinema.Application.Revenue;
+namespace Cinema.Application.Revenues;
 
 public class CreateRevenueCommand : IRequest
 {

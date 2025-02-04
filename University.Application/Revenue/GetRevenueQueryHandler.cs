@@ -7,7 +7,7 @@ using Microsoft.Extensions.Caching.Distributed;
 using Cinema.Models;
 using Cinema.Persistence;
 
-namespace Cinema.Application.Students;
+namespace Cinema.Application.Revenues;
 
 public class GetRevenueQueryHandler : IRequestHandler<GetRevenueQuery, Revenue>
 {

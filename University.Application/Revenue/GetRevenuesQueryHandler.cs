@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Cinema.Models;
 using Cinema.Persistence;
 
-namespace Cinema.Application.Students;
+namespace Cinema.Application.Revenues;
 
 public class GetRevenuesQueryHandler : IRequestHandler<GetRevenuesQuery, List<Revenue>>
 {

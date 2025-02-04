@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Cinema.Models;
 using Cinema.Persistence;
 
-namespace Cinema.Application.Revenue;
+namespace Cinema.Application.Revenues;
 
 public class CreateRevenueCommandHandler : IRequestHandler<CreateRevenueCommand>
 {

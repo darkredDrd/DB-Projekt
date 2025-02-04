@@ -2,7 +2,7 @@
 
 using Cinema.Models;
 
-namespace Cinema.Application.Students;
+namespace Cinema.Application.Revenues;
 
 public class GetRevenueQuery : IRequest<Revenue>
 {
