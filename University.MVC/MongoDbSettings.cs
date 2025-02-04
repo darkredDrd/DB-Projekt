@@ -1,7 +1,7 @@
-namespace University.MVC;
+namespace Cinema.MVC;
 
 public class MongoDbSettings
 {
     public string ConnectionString { get; set; }
-    public string UniversityDbName { get; set; }
+    public string CinemaDbName { get; set; }
 }
