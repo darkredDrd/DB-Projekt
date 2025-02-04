@@ -1,6 +1,6 @@
 ﻿namespace Cinema.Models { 
 
-public class Cinema
+public class Building
 {
     public int Id { get; set; }
 
