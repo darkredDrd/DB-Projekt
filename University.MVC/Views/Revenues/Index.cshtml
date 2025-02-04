@@ -1,10 +1,10 @@
-﻿@model IEnumerable<University.MVC.ViewModels.Marks.RevenueListViewModel>
+﻿@model IEnumerable<Cinema.MVC.ViewModels.Revenues.RevenueListViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Revenues";
 }
 
-<h2>Marks list</h2>
+<h2>Revenues</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -16,19 +16,16 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Score)
+                @Html.DisplayNameFor(model => model.TotalRevenue)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateAwarded)
+                @Html.DisplayNameFor(model => model.ScreeningDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CourseTopic)
+                @Html.DisplayNameFor(model => model.MovieTitle)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TeacherFullName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StudentFullName)
+                @Html.DisplayNameFor(model => model.HallName)
             </th>
             <th></th>
         </tr>
@@ -41,19 +38,16 @@
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Score)
+                    @Html.DisplayFor(modelItem => item.TotalRevenue)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DateAwarded)
+                    @Html.DisplayFor(modelItem => item.ScreeningDate)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CourseTopic)
+                    @Html.DisplayFor(modelItem => item.MovieTitle)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TeacherFullName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StudentFullName)
+                    @Html.DisplayFor(modelItem => item.HallName)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
@@ -64,3 +58,5 @@
         }
     </tbody>
 </table>
+
+

@@ -1,4 +1,4 @@
-﻿namespace University.Models
+﻿namespace Cinema.Models
 {
     public class Revenue
     {
@@ -6,6 +6,6 @@
 
         public Screening Screening { get; set; }
 
-        public float totalRevenue { get; set; }
+        public float TotalRevenue { get; set; }
     }
 }

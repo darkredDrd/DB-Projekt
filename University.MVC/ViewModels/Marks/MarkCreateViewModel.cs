@@ -7,13 +7,13 @@ using University.Models;
 
 namespace University.MVC.ViewModels.Marks
 {
-    public class MarkCreateViewModel
+    public class RevenueCreateViewModel
     {
-        public MarkCreateViewModel()
+        public RevenueCreateViewModel()
         {
         }
 
-        public MarkCreateViewModel(List<Cinema> courses, List<Movie> teachers, List<Revenue> students)
+        public RevenueCreateViewModel(List<Cinema> courses, List<Movie> teachers, List<Revenue> students)
         {
             this.Courses = courses.Select(course => new SelectListItem
             {

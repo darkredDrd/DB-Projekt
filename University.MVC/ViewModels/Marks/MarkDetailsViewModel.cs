@@ -4,7 +4,7 @@ using University.Models;
 
 namespace University.MVC.ViewModels.Marks;
 
-public class MarkDetailsViewModel
+public class RevenueDetailsViewModel
 {
     public int Id { get; set; }
     public int Score { get; set; }
@@ -21,9 +21,9 @@ public class MarkDetailsViewModel
     [Display(Name = "Student")]
     public string StudentFullName { get; set; }
 
-    public static MarkDetailsViewModel FromMark(Hall mark)
+    public static RevenueDetailsViewModel FromMark(Hall mark)
     {
-        var markDetailsViewModel = new MarkDetailsViewModel
+        var markDetailsViewModel = new RevenueDetailsViewModel
         {
             Id = mark.Id,
             Score = mark.Score,
