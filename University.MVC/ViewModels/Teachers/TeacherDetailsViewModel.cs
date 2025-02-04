@@ -23,7 +23,7 @@ public class TeacherDetailsViewModel
 
     public DateTime? Birthday { get; set; }
 
-    public static TeacherDetailsViewModel FromTeacher(Teacher teacher)
+    public static TeacherDetailsViewModel FromTeacher(Movie teacher)
     {
         var teacherDetailsViewModel = new TeacherDetailsViewModel()
         {

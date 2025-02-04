@@ -23,7 +23,7 @@ public class StudentDetailsViewModel
 
     public DateTime? Birthday { get; set; }
 
-    public static StudentDetailsViewModel FromStudent(Student student)
+    public static StudentDetailsViewModel FromStudent(Revenue student)
     {
         var studentDetailsViewModel = new StudentDetailsViewModel()
         {

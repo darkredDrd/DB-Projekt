@@ -7,7 +7,7 @@ using University.Persistence;
 
 namespace University.Application.Students;
 
-public class GetStudentsQueryHandler : IRequestHandler<GetStudentsQuery, List<Student>>
+public class GetStudentsQueryHandler : IRequestHandler<GetStudentsQuery, List<Revenue>>
 {
     private readonly UniversityContext context;
 
@@ -16,7 +16,7 @@ public class GetStudentsQueryHandler : IRequestHandler<GetStudentsQuery, List<St
         this.context = context;
     }
 
-    public async Task<List<Student>> Handle(GetStudentsQuery request, CancellationToken cancellationToken)
+    public async Task<List<Revenue>> Handle(GetStudentsQuery request, CancellationToken cancellationToken)
     {
         var students = await context.Students.ToListAsync(cancellationToken);
         return students;

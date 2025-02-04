@@ -7,7 +7,7 @@ using University.Persistence;
 
 namespace University.Application.Teachers;
 
-public class GetTeacherQueryHandler : IRequestHandler<GetTeacherQuery, Teacher>
+public class GetTeacherQueryHandler : IRequestHandler<GetTeacherQuery, Movie>
 {
     private readonly UniversityContext context;
 
@@ -16,7 +16,7 @@ public class GetTeacherQueryHandler : IRequestHandler<GetTeacherQuery, Teacher>
         this.context = context;
     }
 
-    public async Task<Teacher> Handle(GetTeacherQuery request, CancellationToken cancellationToken)
+    public async Task<Movie> Handle(GetTeacherQuery request, CancellationToken cancellationToken)
     {
         var teacher = await context.Teachers.FirstOrDefaultAsync(s => s.Id == request.Id, cancellationToken);
         return teacher;

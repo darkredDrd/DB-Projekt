@@ -50,7 +50,7 @@ public class StudentUpdateViewModel
         return updateStudentCommand;
     }
 
-    public static StudentUpdateViewModel FromStudent(Student student)
+    public static StudentUpdateViewModel FromStudent(Revenue student)
     {
         var studentUpdateViewModel = new StudentUpdateViewModel
         {

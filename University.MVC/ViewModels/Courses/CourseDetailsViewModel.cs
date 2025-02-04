@@ -19,7 +19,7 @@ public class CourseListViewModel
     [Display(Name = "End date")]
     public DateTime EndDate { get; set; }
 
-    public static CourseListViewModel FromCourse(Course course)
+    public static CourseListViewModel FromCourse(Cinema course)
     {
         var courseListViewModel = new CourseListViewModel
         {

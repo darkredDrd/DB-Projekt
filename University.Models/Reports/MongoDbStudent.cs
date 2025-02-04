@@ -1,29 +1,31 @@
-﻿namespace University.Models.Reports;
-
-public class MongoDbStudent
+﻿namespace Cinema.Models.Reports
 {
-    public string FullName { get; set; }
-    public DateTime? Birthday { get; set; }
 
-    public List<MongoDbCourse> Courses { get; set; }
-
-    public static MongoDbStudent FromStudent(Student student)
+    public class MongoDbStudent
     {
+        public string FullName { get; set; }
+        public DateTime? Birthday { get; set; }
 
-        var mongoDbStudent = new MongoDbStudent
+        public List<MongoDbCourse> Courses { get; set; }
+
+        public static MongoDbStudent FromStudent(Revenue student)
         {
-            FullName = $"{student.FirstName} {student.LastName}",
-            Birthday = student.Birthday
-        };
 
-        var courseGroups = student.Marks.GroupBy(mark => mark.Course);
-        mongoDbStudent.Courses = courseGroups.Select(courseGroup => new MongoDbCourse
-        {
-            Topic = courseGroup.Key.Topic,
-            TotalScore = courseGroup.Sum(mark => mark.Score),
-            Marks = courseGroup.Select(MongoDbMark.FromMark).ToList()
-        }).ToList();
+            var mongoDbStudent = new MongoDbStudent
+            {
+                FullName = $"{student.FirstName} {student.LastName}",
+                Birthday = student.Birthday
+            };
 
-        return mongoDbStudent;
+            var courseGroups = student.Marks.GroupBy(mark => mark.Course);
+            mongoDbStudent.Courses = courseGroups.Select(courseGroup => new MongoDbCourse
+            {
+                Topic = courseGroup.Key.Topic,
+                TotalScore = courseGroup.Sum(mark => mark.Score),
+                Marks = courseGroup.Select(MongoDbMark.FromMark).ToList()
+            }).ToList();
+
+            return mongoDbStudent;
+        }
     }
 }

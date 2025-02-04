@@ -12,13 +12,13 @@ namespace University.Persistence
             this.Database.EnsureCreated();
         }
 
-        public DbSet<Student> Students { get; set; }
+        public DbSet<Revenue> Students { get; set; }
 
-        public DbSet<Course> Courses { get; set; }
+        public DbSet<Cinema> Courses { get; set; }
 
         public DbSet<Teacher> Teachers { get; set; }
 
-        public DbSet<Mark> Marks { get; set; }
+        public DbSet<Hall> Marks { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

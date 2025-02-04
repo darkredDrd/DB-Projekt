@@ -36,7 +36,7 @@ public class CreateMarkCommandHandler : IRequestHandler<CreateMarkCommand>
             throw new NullReferenceException("Student not found");
         }
 
-        var mark = new Mark
+        var mark = new Hall
         {
             Score = request.Score,
             DateAwarded = request.DateAwarded,

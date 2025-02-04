@@ -50,7 +50,7 @@ public class TeacherUpdateViewModel
         return updateTeacherCommand;
     }
 
-    public static TeacherUpdateViewModel FromTeacher(Teacher teacher)
+    public static TeacherUpdateViewModel FromTeacher(Movie teacher)
     {
         var teacherUpdateViewModel = new TeacherUpdateViewModel
         {

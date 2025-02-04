@@ -19,9 +19,9 @@ public class UpdateCourseCommand : IRequest
     public List<Assignment> StudentAssignments{ get; set; } = new();
     public List<Assignment> TeacherAssignments { get; set; } = new();
 
-    public Course ToCourse()
+    public Cinema ToCourse()
     {
-        var course = new Course
+        var course = new Cinema
         {
             Id = this.Id,
             Topic = this.Topic,

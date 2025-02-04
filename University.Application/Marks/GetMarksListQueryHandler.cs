@@ -7,7 +7,7 @@ using University.Persistence;
 
 namespace University.Application.Marks;
 
-public class GetMarksListQueryHandler : IRequestHandler<GetMarksListQuery, List<Mark>>
+public class GetMarksListQueryHandler : IRequestHandler<GetMarksListQuery, List<Hall>>
 {
     private readonly UniversityContext context;
 
@@ -16,7 +16,7 @@ public class GetMarksListQueryHandler : IRequestHandler<GetMarksListQuery, List<
         this.context = context;
     }
 
-    public async Task<List<Mark>> Handle(GetMarksListQuery request, CancellationToken cancellationToken)
+    public async Task<List<Hall>> Handle(GetMarksListQuery request, CancellationToken cancellationToken)
     {
         var marks = await context.Marks
             .Include(mark => mark.Course)

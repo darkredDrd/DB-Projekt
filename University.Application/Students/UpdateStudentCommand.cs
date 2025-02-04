@@ -20,9 +20,9 @@ public class UpdateStudentCommand : IRequest
 
     public DateTime? Birthday { get; set; }
 
-    public Student ToStudent()
+    public Revenue ToStudent()
     {
-        var student = new Student
+        var student = new Revenue
         {
             Id = this.Id,
             PassportNumber = this.PassportNumber,

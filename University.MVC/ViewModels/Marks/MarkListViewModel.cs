@@ -21,7 +21,7 @@ public class MarkListViewModel
     [Display(Name = "Student")]
     public string StudentFullName { get; set; }
 
-    public static MarkListViewModel FromMark(Mark mark)
+    public static MarkListViewModel FromMark(Hall mark)
     {
         var markListViewModel = new MarkListViewModel
         {

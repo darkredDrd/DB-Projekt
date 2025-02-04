@@ -30,7 +30,7 @@ public class GenerateReportCommandHandler : IRequestHandler<GenerateReportComman
             .ThenInclude(mark => mark.Teacher)
             .ToListAsync(cancellationToken);
 
-        var report = new Report
+        var report = new Screening
         {
             GeneratedDate = DateTime.UtcNow,
             Students = students

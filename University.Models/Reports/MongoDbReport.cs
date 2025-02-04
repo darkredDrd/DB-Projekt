@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson;
 
-namespace University.Models.Reports
+namespace Cinema.Models.Reports
 {
     public class MongoDbReport
     {
@@ -10,7 +10,7 @@ namespace University.Models.Reports
 
         public List<MongoDbStudent> Students { get; set; }
 
-        public static MongoDbReport FromReport(Report report)
+        public static MongoDbReport FromReport(Screening report)
         {
             return new MongoDbReport
             {

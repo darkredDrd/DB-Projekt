@@ -10,7 +10,7 @@ using University.Persistence;
 
 namespace University.Application.Students;
 
-public class GetStudentQueryHandler : IRequestHandler<GetStudentQuery, Student>
+public class GetStudentQueryHandler : IRequestHandler<GetStudentQuery, Revenue>
 {
     private readonly UniversityContext context;
     private readonly IDistributedCache cache;
@@ -23,7 +23,7 @@ public class GetStudentQueryHandler : IRequestHandler<GetStudentQuery, Student>
         this.cache = cache;
     }
 
-    public async Task<Student> Handle(GetStudentQuery request, CancellationToken cancellationToken)
+    public async Task<Revenue> Handle(GetStudentQuery request, CancellationToken cancellationToken)
     {
         var student = await GetStudentFromCache(request);
         if (student != null)
@@ -37,7 +37,7 @@ public class GetStudentQueryHandler : IRequestHandler<GetStudentQuery, Student>
         return student;
     }
 
-    private async Task SetStudentToCache(Student student)
+    private async Task SetStudentToCache(Revenue student)
     {
         var key = $"student-{student.Id}";
 
@@ -46,7 +46,7 @@ public class GetStudentQueryHandler : IRequestHandler<GetStudentQuery, Student>
         await cache.SetStringAsync(key, studentAsSerializedJson, options: new DistributedCacheEntryOptions { SlidingExpiration = threeMonths });
     }
 
-    private async Task<Student> GetStudentFromCache(GetStudentQuery request)
+    private async Task<Revenue> GetStudentFromCache(GetStudentQuery request)
     {
         var key = $"student-{request.Id}";
 
@@ -56,11 +56,11 @@ public class GetStudentQueryHandler : IRequestHandler<GetStudentQuery, Student>
             return null;
         }
 
-        var student = JsonSerializer.Deserialize<Student>(studentAsSerializedJson);
+        var student = JsonSerializer.Deserialize<Revenue>(studentAsSerializedJson);
         return student;
     }
 
-    private async Task<Student> GetStudentFromDatabase(GetStudentQuery request, CancellationToken cancellationToken)
+    private async Task<Revenue> GetStudentFromDatabase(GetStudentQuery request, CancellationToken cancellationToken)
     {
         var student = await context.Students.FirstOrDefaultAsync(s => s.Id == request.Id, cancellationToken);
         return student;

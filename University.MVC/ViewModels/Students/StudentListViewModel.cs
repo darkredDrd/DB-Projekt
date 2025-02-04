@@ -15,7 +15,7 @@ public class StudentListViewModel
 
     public string Email { get; set; }
 
-    public static StudentListViewModel FromStudent(Student student)
+    public static StudentListViewModel FromStudent(Revenue student)
     {
         var studentListViewModel = new StudentListViewModel
         {

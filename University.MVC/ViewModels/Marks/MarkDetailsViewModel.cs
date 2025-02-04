@@ -21,7 +21,7 @@ public class MarkDetailsViewModel
     [Display(Name = "Student")]
     public string StudentFullName { get; set; }
 
-    public static MarkDetailsViewModel FromMark(Mark mark)
+    public static MarkDetailsViewModel FromMark(Hall mark)
     {
         var markDetailsViewModel = new MarkDetailsViewModel
         {

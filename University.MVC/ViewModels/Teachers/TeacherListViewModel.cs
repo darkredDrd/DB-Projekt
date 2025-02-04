@@ -15,7 +15,7 @@ public class TeacherListViewModel
 
     public string Email { get; set; }
 
-    public static TeacherListViewModel FromTeacher(Teacher teacher)
+    public static TeacherListViewModel FromTeacher(Movie teacher)
     {
         var teacherListViewModel = new TeacherListViewModel
         {

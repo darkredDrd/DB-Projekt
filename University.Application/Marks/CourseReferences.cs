@@ -4,6 +4,6 @@ namespace University.Application.Marks;
 
 public class CourseReferences
 {
-    public List<Teacher> Teachers { get; set; }
-    public List<Student> Students { get; set; }
+    public List<Movie> Teachers { get; set; }
+    public List<Revenue> Students { get; set; }
 }

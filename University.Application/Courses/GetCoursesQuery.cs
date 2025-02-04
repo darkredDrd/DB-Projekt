@@ -4,7 +4,7 @@ using University.Models;
 
 namespace University.Application.Courses;
 
-public class GetCoursesQuery : IRequest<List<Course>>
+public class GetCoursesQuery : IRequest<List<Cinema>>
 {
 
 }

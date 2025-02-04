@@ -5,9 +5,9 @@ using University.Models;
 
 namespace University.Persistence.Configuration;
 
-public class MarkConfiguration : IEntityTypeConfiguration<Mark>
+public class MarkConfiguration : IEntityTypeConfiguration<Hall>
 {
-    public void Configure(EntityTypeBuilder<Mark> builder)
+    public void Configure(EntityTypeBuilder<Hall> builder)
     {
         builder.HasKey(course => course.Id);
 

@@ -13,8 +13,8 @@ namespace University.MVC.ViewModels.Marks
         {
         }
 
-        public MarkUpdateViewModel(Mark mark, List<Course> courses, List<Teacher> teachers,
-            List<Student> students)
+        public MarkUpdateViewModel(Hall mark, List<Cinema> courses, List<Movie> teachers,
+            List<Revenue> students)
         {
             this.Score = mark.Score;
             this.DateAwarded = mark.DateAwarded;

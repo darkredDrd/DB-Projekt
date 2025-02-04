@@ -7,7 +7,7 @@ using University.Persistence;
 
 namespace University.Application.Courses;
 
-public class GetCourseQueryHandler : IRequestHandler<GetCourseQuery, Course>
+public class GetCourseQueryHandler : IRequestHandler<GetCourseQuery, Cinema>
 {
     private readonly UniversityContext context;
 
@@ -16,7 +16,7 @@ public class GetCourseQueryHandler : IRequestHandler<GetCourseQuery, Course>
         this.context = context;
     }
 
-    public async Task<Course> Handle(GetCourseQuery request, CancellationToken cancellationToken)
+    public async Task<Cinema> Handle(GetCourseQuery request, CancellationToken cancellationToken)
     {
         var course = await context.Courses
             .Include(course => course.Students)

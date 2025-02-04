@@ -5,9 +5,9 @@ using University.Models;
 
 namespace University.Persistence.Configuration
 {
-    public class StudentConfiguration : IEntityTypeConfiguration<Student>
+    public class StudentConfiguration : IEntityTypeConfiguration<Revenue>
     {
-        public void Configure(EntityTypeBuilder<Student> builder)
+        public void Configure(EntityTypeBuilder<Revenue> builder)
         {
             builder.HasKey(student => student.Id);
 

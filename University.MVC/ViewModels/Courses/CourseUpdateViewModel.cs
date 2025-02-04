@@ -55,7 +55,7 @@ public class CourseUpdateViewModel
     }
 
 
-    public static CourseUpdateViewModel FromCourse(Course course, List<Student> allStudents, List<Teacher> allTeachers)
+    public static CourseUpdateViewModel FromCourse(Cinema course, List<Revenue> allStudents, List<Movie> allTeachers)
     {
         var courseUpdateViewModel = new CourseUpdateViewModel
         {

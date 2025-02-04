@@ -5,9 +5,9 @@ using University.Models;
 
 namespace University.Persistence.Configuration
 {
-    public class CourseConfiguration : IEntityTypeConfiguration<Course>
+    public class CourseConfiguration : IEntityTypeConfiguration<Cinema>
     {
-        public void Configure(EntityTypeBuilder<Course> builder)
+        public void Configure(EntityTypeBuilder<Cinema> builder)
         {
             builder.HasKey(course => course.Id);
 

@@ -13,7 +13,7 @@ namespace University.MVC.ViewModels.Marks
         {
         }
 
-        public MarkCreateViewModel(List<Course> courses, List<Teacher> teachers, List<Student> students)
+        public MarkCreateViewModel(List<Cinema> courses, List<Movie> teachers, List<Revenue> students)
         {
             this.Courses = courses.Select(course => new SelectListItem
             {

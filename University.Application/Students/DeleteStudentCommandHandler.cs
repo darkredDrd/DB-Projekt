@@ -31,7 +31,7 @@ public class DeleteStudentCommandHandler : IRequestHandler<DeleteStudentCommand>
         await this.InvalidateCache(student);
     }
 
-    private async Task InvalidateCache(Student student)
+    private async Task InvalidateCache(Revenue student)
     {
         var key = $"student-{student.Id}";
         await this.cache.RemoveAsync(key);

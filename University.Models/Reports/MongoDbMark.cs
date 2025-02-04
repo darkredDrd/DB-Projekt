@@ -1,18 +1,20 @@
-﻿namespace University.Models.Reports;
-
-public class MongoDbMark
+﻿namespace Cinema.Models.Reports
 {
-    public int Score { get; set; }
-    public DateTime DateAwarded { get; set; }
-    public string TeacherName { get; set; }
 
-    public static MongoDbMark FromMark(Mark mark)
+    public class MongoDbMark
     {
-        return new MongoDbMark
+        public int Score { get; set; }
+        public DateTime DateAwarded { get; set; }
+        public string TeacherName { get; set; }
+
+        public static MongoDbMark FromMark(Hall mark)
         {
-            Score = mark.Score,
-            DateAwarded = mark.DateAwarded,
-            TeacherName = $"{mark.Teacher.FirstName} {mark.Teacher.LastName}"
-        };
+            return new MongoDbMark
+            {
+                Score = mark.Score,
+                DateAwarded = mark.DateAwarded,
+                TeacherName = $"{mark.Teacher.FirstName} {mark.Teacher.LastName}"
+            };
+        }
     }
 }

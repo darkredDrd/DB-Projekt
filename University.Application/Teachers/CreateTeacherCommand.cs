@@ -18,9 +18,9 @@ public class CreateTeacherCommand : IRequest
 
     public DateTime? Birthday { get; set; }
 
-    public Teacher ToTeacher()
+    public Movie ToTeacher()
     {
-        var teacher = new Teacher
+        var teacher = new Movie
         {
             PassportNumber = this.PassportNumber,
             Email = this.Email,

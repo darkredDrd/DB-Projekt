@@ -14,9 +14,9 @@ public class CreateCourseCommand : IRequest
 
     public DateTime EndDate { get; set; }
 
-    public Course ToCourse()
+    public Cinema ToCourse()
     {
-        var course = new Course
+        var course = new Cinema
         {
             Topic = this.Topic,
             NumberOfHours = this.NumberOfHours,

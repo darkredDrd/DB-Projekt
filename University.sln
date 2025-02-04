@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "University.Models", "University.Models\University.Models.csproj", "{D20DA430-91FE-4278-AC6C-EA62D3896650}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinema.Models", "University.Models\Cinema.Models.csproj", "{D20DA430-91FE-4278-AC6C-EA62D3896650}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "University.Persistence", "University.Persistence\University.Persistence.csproj", "{B163D775-B976-4B6F-AFAA-EA0184FFF946}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinema.Persistence", "University.Persistence\Cinema.Persistence.csproj", "{B163D775-B976-4B6F-AFAA-EA0184FFF946}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "University.MVC", "University.MVC\University.MVC.csproj", "{2F8728D7-5C86-4D12-A66B-46B4D742AFD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinema.MVC", "University.MVC\Cinema.MVC.csproj", "{2F8728D7-5C86-4D12-A66B-46B4D742AFD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "University.Application", "University.Application\University.Application.csproj", "{275EF4FF-D0BF-4B0E-B144-99AD8E8EFCD2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinema.Application", "University.Application\Cinema.Application.csproj", "{275EF4FF-D0BF-4B0E-B144-99AD8E8EFCD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

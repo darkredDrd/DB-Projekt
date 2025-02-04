@@ -26,9 +26,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\University.Application\University.Application.csproj" />
-	  <ProjectReference Include="..\University.Models\University.Models.csproj" />
-	  <ProjectReference Include="..\University.Persistence\University.Persistence.csproj" />
+	  <ProjectReference Include="..\University.Application\Cinema.Application.csproj" />
+	  <ProjectReference Include="..\University.Models\Cinema.Models.csproj" />
+	  <ProjectReference Include="..\University.Persistence\Cinema.Persistence.csproj" />
 	</ItemGroup>
 
 </Project>
