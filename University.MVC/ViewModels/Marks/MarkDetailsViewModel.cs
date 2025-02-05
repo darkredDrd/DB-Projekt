@@ -1,38 +1,32 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using University.Models;
+using Cinema.Models;
 
-namespace University.MVC.ViewModels.Marks;
+namespace Cinema.MVC.ViewModels.Halls;
 
-public class RevenueDetailsViewModel
+public class HallDetailsViewModel
 {
     public int Id { get; set; }
-    public int Score { get; set; }
 
-    [Display(Name = "Date awarded")]
-    public DateTime DateAwarded { get; set; }
+    [Display(Name = "Hall Name")]
+    public string Name { get; set; }
 
-    [Display(Name = "Course")]
-    public string CourseTopic { get; set; }
+    [Display(Name = "Number of Seats")]
+    public int Seats { get; set; }
 
-    [Display(Name = "Teacher")]
-    public string TeacherFullName { get; set; }
+    [Display(Name = "Cinema")]
+    public string CinemaName { get; set; }
 
-    [Display(Name = "Student")]
-    public string StudentFullName { get; set; }
-
-    public static RevenueDetailsViewModel FromMark(Hall mark)
+    public static HallDetailsViewModel FromHall(Hall hall)
     {
-        var markDetailsViewModel = new RevenueDetailsViewModel
+        var hallDetailsViewModel = new HallDetailsViewModel
         {
-            Id = mark.Id,
-            Score = mark.Score,
-            DateAwarded = mark.DateAwarded,
-            CourseTopic = mark.Course.Topic,
-            TeacherFullName = $"{mark.Teacher.FirstName} {mark.Teacher.LastName}",
-            StudentFullName = $"{mark.Student.FirstName} {mark.Student.LastName}",
+            Id = hall.Id,
+            Name = hall.Name,
+            Seats = hall.Seats,
+            CinemaName = hall.Cinema.Name
         };
 
-        return markDetailsViewModel;
+        return hallDetailsViewModel;
     }
 }

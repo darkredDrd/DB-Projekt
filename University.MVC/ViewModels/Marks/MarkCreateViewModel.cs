@@ -2,70 +2,46 @@
 
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-using University.Application.Marks;
-using University.Models;
+using Cinema.Application.Marks;
+using Cinema.Models;
 
-namespace University.MVC.ViewModels.Marks
+namespace Cinema.MVC.ViewModels.Halls
 {
-    public class RevenueCreateViewModel
+    public class HallCreateViewModel
     {
-        public RevenueCreateViewModel()
+        public HallCreateViewModel()
         {
         }
 
-        public RevenueCreateViewModel(List<Cinema> courses, List<Movie> teachers, List<Revenue> students)
+        public HallCreateViewModel(List<Cinema> cinemas)
         {
-            this.Courses = courses.Select(course => new SelectListItem
+            this.Cinemas = cinemas.Select(cinema => new SelectListItem
             {
-                Text = course.Topic,
-                Value = course.Id.ToString()
-            }).ToList();
-
-            this.Teachers = teachers.Select(teacher => new SelectListItem
-            {
-                Text = $"{teacher.FirstName} {teacher.LastName}",
-                Value = teacher.Id.ToString()
-            }).ToList();
-
-            this.Students = students.Select(student => new SelectListItem
-            {
-                Text = $"{student.FirstName} {student.LastName}",
-                Value = student.Id.ToString()
+                Text = cinema.Name,
+                Value = cinema.Id.ToString()
             }).ToList();
         }
 
         [Required]
-        [Range(0, 100)]
-        public int Score { get; set; }
+        [MaxLength(100)]
+        public string Name { get; set; }
 
         [Required]
-        [Display(Name = "Date Awarded")]
-        public DateTime DateAwarded { get; set; }
+        [Range(1, 500)]
+        public int Seats { get; set; }
 
-        public List<SelectListItem> Courses { get; set; }
-
-        [Required]
-        public int CourseId { get; set; }
-
-        public List<SelectListItem> Teachers { get; set; }
+        public List<SelectListItem> Cinemas { get; set; }
 
         [Required]
-        public int TeacherId { get; set; }
-
-        public List<SelectListItem> Students { get; set; }
-
-        [Required]
-        public int StudentId { get; set; }
+        public int CinemaId { get; set; }
 
         public CreateMarkCommand ToCommand()
         {
             var createMarkCommand = new CreateMarkCommand
             {
-                CourseId = this.CourseId,
-                DateAwarded = this.DateAwarded,
-                Score = this.Score,
-                StudentId = this.StudentId,
-                TeacherId = this.TeacherId
+                Name = this.Name,
+                Seats = this.Seats,
+                CinemaId = this.CinemaId
             };
 
             return createMarkCommand;

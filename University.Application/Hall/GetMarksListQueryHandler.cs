@@ -2,28 +2,26 @@
 
 using Microsoft.EntityFrameworkCore;
 
-using University.Models;
-using University.Persistence;
+using Cinema.Models;
+using Cinema.Persistence;
 
-namespace University.Application.Marks;
+namespace Cinema.Application.Marks;
 
 public class GetMarksListQueryHandler : IRequestHandler<GetMarksListQuery, List<Hall>>
 {
-    private readonly UniversityContext context;
+    private readonly CinemaContext context;
 
-    public GetMarksListQueryHandler(UniversityContext context)
+    public GetMarksListQueryHandler(CinemaContext context)
     {
         this.context = context;
     }
 
     public async Task<List<Hall>> Handle(GetMarksListQuery request, CancellationToken cancellationToken)
     {
-        var marks = await context.Marks
-            .Include(mark => mark.Course)
-            .Include(mark => mark.Teacher)
-            .Include(mark => mark.Student)
+        var halls = await context.Halls
+            .Include(hall => hall.Cinema)
             .ToListAsync(cancellationToken);
 
-        return marks;
+        return halls;
     }
 }

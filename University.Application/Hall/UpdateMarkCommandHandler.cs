@@ -2,56 +2,40 @@
 
 using Microsoft.EntityFrameworkCore;
 
-using University.Persistence;
+using Cinema.Persistence;
 
-namespace University.Application.Marks;
+namespace Cinema.Application.Marks;
 
 public class UpdateMarkCommandHandler : IRequestHandler<UpdateMarkCommand>
 {
-    private readonly UniversityContext context;
+    private readonly CinemaContext context;
 
-    public UpdateMarkCommandHandler(UniversityContext context)
+    public UpdateMarkCommandHandler(CinemaContext context)
     {
         this.context = context;
     }
 
     public async Task Handle(UpdateMarkCommand request, CancellationToken cancellationToken)
     {
-        var existingMark = await context.Marks
-            .Include(mark => mark.Course)
-            .Include(mark => mark.Teacher)
-            .Include(mark => mark.Student)
-            .FirstOrDefaultAsync(mark => mark.Id == request.Id, cancellationToken);
+        var existingHall = await context.Halls
+            .Include(hall => hall.Cinema)
+            .FirstOrDefaultAsync(hall => hall.Id == request.Id, cancellationToken);
 
-        if (existingMark == null)
+        if (existingHall == null)
         {
-            throw new NullReferenceException("Mark not found");
+            throw new NullReferenceException("Hall not found");
         }
 
-        var course = await context.Courses.FirstOrDefaultAsync(c => c.Id == request.CourseId, cancellationToken);
-        if (course == null)
+        var cinema = await context.Cinemas.FirstOrDefaultAsync(c => c.Id == request.CinemaId, cancellationToken);
+        if (cinema == null)
         {
-            throw new NullReferenceException("Course not found");
+            throw new NullReferenceException("Cinema not found");
         }
 
-        var teacher = await context.Teachers.FirstOrDefaultAsync(m => m.Id == request.TeacherId, cancellationToken);
-        if (teacher == null)
-        {
-            throw new NullReferenceException("Teacher not found");
-        }
+        existingHall.Name = request.Name;
+        existingHall.Seats = request.Seats;
+        existingHall.Cinema = cinema;
 
-        var student = await context.Students.FirstOrDefaultAsync(m => m.Id == request.StudentId, cancellationToken);
-        if (student == null)
-        {
-            throw new NullReferenceException("Student not found");
-        }
-
-        existingMark.Score = request.Score;
-        existingMark.DateAwarded = request.DateAwarded;
-        existingMark.Course = course;
-        existingMark.Teacher = teacher;
-        existingMark.Student = student;
-        
         await context.SaveChangesAsync(cancellationToken);
     }
 }

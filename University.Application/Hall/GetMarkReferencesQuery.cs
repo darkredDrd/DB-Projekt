@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace University.Application.Marks;
+namespace Cinema.Application.Marks;
 
 public class GetMarkReferencesQuery : IRequest<RevenueReferences>
 {

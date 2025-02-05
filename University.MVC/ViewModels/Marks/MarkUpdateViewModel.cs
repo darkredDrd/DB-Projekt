@@ -2,45 +2,29 @@
 
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-using University.Application.Marks;
-using University.Models;
+using Cinema.Application.Marks;
+using Cinema.Models;
 
-namespace University.MVC.ViewModels.Marks
+namespace Cinema.MVC.ViewModels.Halls
 {
-    public class RevenueUpdateViewModel
+    public class HallUpdateViewModel
     {
-        public RevenueUpdateViewModel()
+        public HallUpdateViewModel()
         {
         }
 
-        public RevenueUpdateViewModel(Hall mark, List<Cinema> courses, List<Movie> teachers,
-            List<Revenue> students)
+        public HallUpdateViewModel(Hall hall, List<Cinema> cinemas)
         {
-            this.Score = mark.Score;
-            this.DateAwarded = mark.DateAwarded;
-            this.CourseId = mark.Course.Id;
-            this.TeacherId = mark.Teacher.Id;
-            this.StudentId = mark.Student.Id;
+            this.Id = hall.Id;
+            this.Name = hall.Name;
+            this.Seats = hall.Seats;
+            this.CinemaId = hall.Cinema.Id;
 
-            this.Courses = courses.Select(course => new SelectListItem
+            this.Cinemas = cinemas.Select(cinema => new SelectListItem
             {
-                Text = course.Topic,
-                Value = course.Id.ToString(),
-                Selected = course.Id == this.CourseId
-            }).ToList();
-
-            this.Teachers = teachers.Select(teacher => new SelectListItem
-            {
-                Text = $"{teacher.FirstName} {teacher.LastName}",
-                Value = teacher.Id.ToString(),
-                Selected = teacher.Id == this.TeacherId
-            }).ToList();
-
-            this.Students = students.Select(student => new SelectListItem
-            {
-                Text = $"{student.FirstName} {student.LastName}",
-                Value = student.Id.ToString(),
-                Selected = student.Id == this.StudentId
+                Text = cinema.Name,
+                Value = cinema.Id.ToString(),
+                Selected = cinema.Id == this.CinemaId
             }).ToList();
         }
 
@@ -48,38 +32,26 @@ namespace University.MVC.ViewModels.Marks
         public int Id { get; set; }
 
         [Required]
-        [Range(0, 100)]
-        public int Score { get; set; }
+        [MaxLength(100)]
+        public string Name { get; set; }
 
         [Required]
-        [Display(Name = "Date Awarded")]
-        public DateTime DateAwarded { get; set; }
+        [Range(1, 500)]
+        public int Seats { get; set; }
 
-        public List<SelectListItem> Courses { get; set; }
-
-        [Required]
-        public int CourseId { get; set; }
-
-        public List<SelectListItem> Teachers { get; set; }
+        public List<SelectListItem> Cinemas { get; set; }
 
         [Required]
-        public int TeacherId { get; set; }
-
-        public List<SelectListItem> Students { get; set; }
-
-        [Required]
-        public int StudentId { get; set; }
+        public int CinemaId { get; set; }
 
         public UpdateMarkCommand ToCommand()
         {
             var updateMarkCommand = new UpdateMarkCommand
             {
                 Id = this.Id,
-                CourseId = this.CourseId,
-                DateAwarded = this.DateAwarded,
-                Score = this.Score,
-                StudentId = this.StudentId,
-                TeacherId = this.TeacherId
+                Name = this.Name,
+                Seats = this.Seats,
+                CinemaId = this.CinemaId
             };
 
             return updateMarkCommand;

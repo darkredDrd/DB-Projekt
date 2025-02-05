@@ -1,11 +1,9 @@
-﻿using University.Models;
+﻿using Cinema.Models;
 
-namespace University.Application.Marks
+namespace Cinema.Application.Marks
 {
     public class RevenueReferences
     {
-        public List<Cinema> Courses { get; set; }
-        public List<Movie> Teachers { get; set; }
-        public List<Revenue> Students { get; set; }
+        public List<Cinema> Cinemas { get; set; }
     }
 }

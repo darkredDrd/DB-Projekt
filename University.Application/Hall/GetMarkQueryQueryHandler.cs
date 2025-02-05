@@ -2,28 +2,26 @@
 
 using Microsoft.EntityFrameworkCore;
 
-using University.Models;
-using University.Persistence;
+using Cinema.Models;
+using Cinema.Persistence;
 
-namespace University.Application.Marks;
+namespace Cinema.Application.Marks;
 
 public class GetMarkQueryQueryHandler : IRequestHandler<GetMarkQuery, Hall>
 {
-    private readonly UniversityContext context;
+    private readonly CinemaContext context;
 
-    public GetMarkQueryQueryHandler(UniversityContext context)
+    public GetMarkQueryQueryHandler(CinemaContext context)
     {
         this.context = context;
     }
 
     public async Task<Hall> Handle(GetMarkQuery request, CancellationToken cancellationToken)
     {
-        var mark = await context.Marks
-            .Include(mark => mark.Course)
-            .Include(mark => mark.Teacher)
-            .Include(mark => mark.Student)
-            .FirstOrDefaultAsync(mark => mark.Id == request.Id, cancellationToken);
+        var hall = await context.Halls
+            .Include(hall => hall.Cinema)
+            .FirstOrDefaultAsync(hall => hall.Id == request.Id, cancellationToken);
 
-        return mark;
+        return hall;
     }
 }
