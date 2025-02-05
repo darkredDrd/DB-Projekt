@@ -1,7 +1,7 @@
 ﻿using Cinema.Application.Buildings;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-//using University.Application.Marks;
+using Cinema.MVC.ViewModels.Buildings;
 
 namespace Cinema.MVC.Controllers
 {
@@ -20,9 +20,9 @@ namespace Cinema.MVC.Controllers
             var getBuildingsQuery = new GetBuildingsQuery();
             var buildings = await mediator.Send(getBuildingsQuery);
 
-            var buildingsListViewModels = buildings.Select(BuildingListViewModel.FromBuilding).ToList();
+            var buildingDetailsViewModels = buildings.Select(BuildingDetailsViewModel.FromBuilding).ToList();
 
-            return View(buildingListViewModels);
+            return View(buildingDetailsViewModels);
         }
 
         // GET: Buildings/Details/5
