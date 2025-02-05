@@ -11,7 +11,7 @@ public class RevenueListViewModel
     public float TotalRevenue { get; set; }
 
     [Display(Name = "Screening Date")]
-    public DateTime ScreeningDate { get; set; }
+    public DateTime ScreeningDateTime { get; set; }
 
     [Display(Name = "Movie Title")]
     public string MovieTitle { get; set; }
@@ -25,7 +25,7 @@ public class RevenueListViewModel
         {
             Id = revenue.Id,
             TotalRevenue = revenue.TotalRevenue,
-            ScreeningDate = revenue.Screening.Date,
+            ScreeningDateTime = revenue.Screening.DateTime,
             MovieTitle = revenue.Screening.Movie.Title,
             HallName = revenue.Screening.Hall.Name
         };

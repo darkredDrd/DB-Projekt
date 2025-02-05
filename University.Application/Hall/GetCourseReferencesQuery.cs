@@ -2,6 +2,6 @@
 
 namespace Cinema.Application.Marks;
 
-public class GetCourseReferencesQuery : IRequest<CourseReferences>
+public class GetScreeningReferencesQuery : IRequest<CourseReferences>
 {
 }

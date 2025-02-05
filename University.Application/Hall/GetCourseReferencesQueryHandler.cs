@@ -6,7 +6,7 @@ using Cinema.Persistence;
 
 namespace Cinema.Application.Marks;
 
-public class GetCourseReferencesQueryHandler : IRequestHandler<GetCourseReferencesQuery, CourseReferences>
+public class GetScreeningReferencesQueryHandler : IRequestHandler<GetScreeningReferencesQuery, CourseReferences>
 {
     private readonly CinemaContext context;
 
@@ -15,7 +15,7 @@ public class GetCourseReferencesQueryHandler : IRequestHandler<GetCourseReferenc
         this.context = context;
     }
 
-    public async Task<CourseReferences> Handle(GetCourseReferencesQuery request, CancellationToken cancellationToken)
+    public async Task<CourseReferences> Handle(GetScreeningReferencesQuery request, CancellationToken cancellationToken)
     {
         var allCinemas = await context.Cinemas.ToListAsync(cancellationToken);
 
