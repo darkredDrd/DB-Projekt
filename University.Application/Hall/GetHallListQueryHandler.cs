@@ -19,7 +19,7 @@ public class GetHallListQueryHandler : IRequestHandler<GetHallListQuery, List<Ha
     public async Task<List<Hall>> Handle(GetHallListQuery request, CancellationToken cancellationToken)
     {
         var halls = await context.Halls
-            .Include(hall => hall.Cinema)
+            .Include(hall => hall.Building)
             .ToListAsync(cancellationToken);
 
         return halls;

@@ -2,8 +2,8 @@
 
 namespace Cinema.Application.Hall
 {
-    public class RevenueReferences
+    public class HallReferences
     {
-        public List<Cinema> Cinemas { get; set; }
+        public List<Building> Buildings { get; set; }
     }
 }
