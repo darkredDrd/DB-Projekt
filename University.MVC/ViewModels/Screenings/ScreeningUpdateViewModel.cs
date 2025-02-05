@@ -14,7 +14,7 @@ namespace Cinema.MVC.ViewModels.Screenings
         public ScreeningUpdateViewModel(Screening screening, List<Movie> movies)
         {
             this.Id = screening.Id;
-            this.Hall = screening.Hall;
+            this.Hall= screening.Hall;
             this.MovieId = screening.Movie.Id;
 
             this.Movies = movies.Select(movie => new SelectListItem

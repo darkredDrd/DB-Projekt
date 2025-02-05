@@ -18,7 +18,7 @@ public class GetBuildingsQueryHandler : IRequestHandler<GetBuildingsQuery, List<
 
     public async Task<List<Building>> Handle(GetBuildingsQuery request, CancellationToken cancellationToken)
     {
-        var buildings = await context.Courses //gleiche wie bei GetBuildingQueryHandler
+        var buildings = await context.Buildings //gleiche wie bei GetBuildingQueryHandler
             //.Include(course => course.Students)
             //.Include(course => course.Teachers)
             .ToListAsync(cancellationToken);

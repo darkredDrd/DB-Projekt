@@ -2,6 +2,6 @@
 
 namespace Cinema.Application.Hall;
 
-public class GetScreeningReferencesQuery : IRequest<CinemaReferences>
+public class GetBuildingReferencesQuery : IRequest<BuildingReferences>
 {
 }
