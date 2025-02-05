@@ -49,7 +49,7 @@ public class BuildingUpdateViewModel
     }
 
 
-    public static BuildingUpdateViewModel FromBuilding(Building building, List<Revenue> allStudents, List<Movie> allTeachers) //revenue?
+    public static BuildingUpdateViewModel FromBuilding(Building building) //revenue?
     {
         var buildingUpdateViewModel = new BuildingUpdateViewModel
         {
