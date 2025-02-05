@@ -2,7 +2,7 @@
 
 namespace University.Application.Marks
 {
-    public class MarkReferences
+    public class RevenueReferences
     {
         public List<Cinema> Courses { get; set; }
         public List<Movie> Teachers { get; set; }

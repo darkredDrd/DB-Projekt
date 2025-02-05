@@ -2,6 +2,6 @@
 
 namespace University.Application.Marks;
 
-public class GetMarkReferencesQuery : IRequest<MarkReferences>
+public class GetMarkReferencesQuery : IRequest<RevenueReferences>
 {
 }
