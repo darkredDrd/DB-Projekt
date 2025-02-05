@@ -22,7 +22,7 @@ namespace Cinema.MVC.Controllers
             var getScreeningsQuery = new GetScreeningsQuery();
             var screenings = await this.mediator.Send(getScreeningsQuery);
 
-            var screeningListViewModels = screenings.Select(ScreeningListViewModel.FromActors).ToList();
+            var screeningListViewModels = screenings.Select(ScreeningListViewModel.FromScreening).ToList();
 
             return View(screeningListViewModels);
         }
@@ -49,7 +49,7 @@ namespace Cinema.MVC.Controllers
             return View(screeningCreateViewModel);
         }
 
-        // POST: ScreeningsController/Create
+        // POST: ScreeningController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(ScreeningCreateViewModel screeningCreateViewModel)
@@ -57,7 +57,7 @@ namespace Cinema.MVC.Controllers
             if (ModelState.IsValid)
             {
                 var createScreeningCommand = screeningCreateViewModel.ToCommand();
-                
+
                 await mediator.Send(createScreeningCommand);
 
                 return RedirectToAction(nameof(Index));
@@ -80,7 +80,7 @@ namespace Cinema.MVC.Controllers
             return View(screeningUpdateViewModel);
         }
 
-        // POST: RevenuesController/Edit/5
+        // POST: ScreeningsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(int id, ScreeningUpdateViewModel screeningUpdateViewModel)
@@ -102,7 +102,6 @@ namespace Cinema.MVC.Controllers
         {
             var getScreeningQuery = new GetScreeningQuery { Id = id };
             var screening = await mediator.Send(getScreeningQuery);
-
             var screeningDetailsViewModel = ScreeningDetailsViewModel.FromScreening(screening);
 
             return View(screeningDetailsViewModel);
@@ -116,7 +115,7 @@ namespace Cinema.MVC.Controllers
             var deleteScreeningCommand = new DeleteScreeningCommand { Id = id };
 
             await mediator.Send(deleteScreeningCommand);
-            
+
             return RedirectToAction(nameof(Index));
         }
     }

@@ -4,7 +4,7 @@ using Cinema.Models;
 
 namespace Cinema.MVC.ViewModels.Buildings;
 
-public class BuildingListViewModel
+public class BuildingDetailsViewModel
 {
     public int Id { get; set; }
 
@@ -14,15 +14,15 @@ public class BuildingListViewModel
     public string Address { get; set; }
 
 
-    public static BuildingListViewModel FromBuilding(Building building)
+    public static BuildingDetailsViewModel FromBuilding(Building building)
     {
-        var buildingListViewModel = new BuildingListViewModel
+        var buildingDetailsViewModel = new BuildingDetailsViewModel
         {
             Id = building.Id,
             Name = building.Name,
             Address = building.Address,
         };
 
-        return buildingListViewModel;
+        return buildingDetailsViewModel;
     }
 }

@@ -23,7 +23,7 @@ public class DeleteActorCommandHandler : IRequestHandler<DeleteActorCommand>
         var actor = await context.Actors.FindAsync(request.Id, cancellationToken);
         if (actor != null)
         {
-            context.Students.Remove(actor);
+            context.Actors.Remove(actor);
         }
 
         await context.SaveChangesAsync(cancellationToken);
