@@ -31,6 +31,7 @@ namespace Cinema.Persistence
             modelBuilder.ApplyConfiguration(new ActorConfiguration());
             modelBuilder.ApplyConfiguration(new HallConfiguration());
             modelBuilder.ApplyConfiguration(new ScreeningConfiguration());
+
         }
     }
 }
