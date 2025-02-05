@@ -1,10 +1,10 @@
-﻿@model Cinema.MVC.ViewModels.Revenues.RevenueDetailsViewModel
+﻿@model Cinema.MVC.ViewModels.Screenings.ScreeningDetailsViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Details about Screening";
 }
 
-<h2>Revenue Details</h2>
+<h2>Screening Details</h2>
 <div>
     <hr />
     <dl class="row">
@@ -13,18 +13,11 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Id)
-        </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TotalRevenue)
+            @Html.DisplayNameFor(model => model.DateTime)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TotalRevenue)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ScreeningDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ScreeningDate)
+            @Html.DisplayFor(model => model.DateTime)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.MovieTitle)

@@ -17,6 +17,11 @@
                 <option value="">--Select a Movie--</option>
             </div>
             <div class="form-group">
+                <label asp-for="HallId">Select a Hall:</label>
+                <select asp-for="HallId" class="form-control" asp-items="Model.Hall"></select>
+                <option value="">--Select a Movie--</option>
+            </div>
+            <div class="form-group">
                 <label asp-for="DateTime" class="control-label"></label>
                 <input asp-for="DateTime" class="form-control" />
                 <span asp-validation-for="DateTime" class="text-danger"></span>

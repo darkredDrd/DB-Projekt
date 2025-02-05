@@ -15,8 +15,17 @@ namespace Cinema.MVC.ViewModels.Screenings
         {
             this.Movies = movies.Select(movie => new SelectListItem
             {
-                Text = $"{movie.Movie.Title} - {movie.Date}",
+                Text = $"{movie.Title}",
                 Value = movie.Id.ToString()
+            }).ToList();
+        }
+
+        public ScreeningCreateViewModel(List<Hall> halls)
+        {
+            this.Halls = halls.Select(hall => new SelectListItem
+            {
+                Text = $"{hall.Name}",
+                Value = hall.Id.ToString()
             }).ToList();
         }
 
@@ -39,8 +48,8 @@ namespace Cinema.MVC.ViewModels.Screenings
         {
             var createScreeningCommand = new CreateScreeningCommand
             {
-                MovieId = this.MovieId,
-                HallId = this.HallId,
+                MovieID = this.MovieId,
+                HallID = this.HallId,
                 DateTime = this.DateTime
             };
 

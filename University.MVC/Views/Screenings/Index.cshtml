@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Cinema.MVC.ViewModels.Revenues.RevenueListViewModel>
+﻿@model IEnumerable<Cinema.MVC.ViewModels.Screenings.ScreeningListViewModel>
 
 @{
-    ViewData["Title"] = "Revenues";
+    ViewData["Title"] = "Screenings";
 }
 
-<h2>Revenues</h2>
+<h2>Screenings</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -16,10 +16,7 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TotalRevenue)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ScreeningDate)
+                @Html.DisplayNameFor(model => model.DateTime)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.MovieTitle)
@@ -38,10 +35,7 @@
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TotalRevenue)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ScreeningDate)
+                    @Html.DisplayFor(modelItem => item.DateTime)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.MovieTitle)
