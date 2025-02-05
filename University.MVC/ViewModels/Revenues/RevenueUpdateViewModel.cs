@@ -19,7 +19,7 @@ namespace Cinema.MVC.ViewModels.Revenues
 
             this.Screenings = screenings.Select(screening => new SelectListItem
             {
-                Text = $"{screening.Movie.Title} - {screening.Date}",
+                Text = $"{screening.Movie.Title} - {screening.DateTime}",
                 Value = screening.Id.ToString(),
                 Selected = screening.Id == this.ScreeningId
             }).ToList();

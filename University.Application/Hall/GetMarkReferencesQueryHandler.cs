@@ -6,22 +6,22 @@ using University.Persistence;
 
 namespace University.Application.Marks;
 
-public class GetMarkReferencesQueryHandler : IRequestHandler<GetMarkReferencesQuery, MarkReferences>
+public class GetRevenueReferencesQueryHandler : IRequestHandler<GetMarkReferencesQuery, RevenueReferences>
 {
     private readonly UniversityContext context;
 
-    public GetMarkReferencesQueryHandler(UniversityContext context)
+    public GetRevenueReferencesQueryHandler(UniversityContext context)
     {
         this.context = context;
     }
 
-    public async Task<MarkReferences> Handle(GetMarkReferencesQuery request, CancellationToken cancellationToken)
+    public async Task<RevenueReferences> Handle(GetMarkReferencesQuery request, CancellationToken cancellationToken)
     {
         var allCourses = await context.Courses.ToListAsync(cancellationToken);
         var allStudents = await context.Students.ToListAsync(cancellationToken);
         var allTeachers = await context.Teachers.ToListAsync(cancellationToken);
 
-        return new MarkReferences
+        return new RevenueReferences
         {
             Courses = allCourses,
             Students = allStudents,

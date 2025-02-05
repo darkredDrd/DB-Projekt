@@ -29,9 +29,9 @@ namespace Cinema.MVC.ViewModels.Screenings
         public int Id { get; set; }
 
         [Required]
-        [Display(Name = "Total Revenue")]
-        [Range(0, double.MaxValue, ErrorMessage = "Total Revenue must be a positive number.")]
-        public float TotalRevenue { get; set; }
+        [Display(Name = "Date Time")]
+        [Range(typeof(DateTime), "1/1/2000", "12/31/2099", ErrorMessage = "Date Time must be between 01/01/2000 and 12/31/2099.")]
+        public DateTime DateTime { get; set; }
 
         [Required]
         [Display(Name = "Movie")]
@@ -50,7 +50,7 @@ namespace Cinema.MVC.ViewModels.Screenings
                 Id = this.Id,
                 MovieId = this.MovieId,
                 HallId = this.HallId,
-                TotalRevenue = this.TotalRevenue
+                DateTime = this.DateTime
             };
 
             return updateScreeningCommand;

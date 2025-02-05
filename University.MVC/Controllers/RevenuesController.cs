@@ -22,7 +22,7 @@ namespace Cinema.MVC.Controllers
             var getRevenuesQuery = new GetRevenuesQuery();
             var revenues = await this.mediator.Send(getRevenuesQuery);
 
-            var revenueListViewModels = revenues.Select(RevenueListViewModel.FromActor).ToList();
+            var revenueListViewModels = revenues.Select(RevenueListViewModel.FromRevenue).ToList();
 
             return View(revenueListViewModels);
         }

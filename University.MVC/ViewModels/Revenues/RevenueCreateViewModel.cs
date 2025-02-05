@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Cinema.Application.Revenue;
-using University.Models;
+using Cinema.Application.Revenues;
+using Cinema.Models;
 
 namespace Cinema.MVC.ViewModels.Revenues
 {
@@ -15,7 +15,7 @@ namespace Cinema.MVC.ViewModels.Revenues
         {
             this.Screenings = screenings.Select(screening => new SelectListItem
             {
-                Text = $"{screening.Movie.Title} - {screening.Date}",
+                Text = $"{screening.Movie.Title} - {screening.DateTime}",
                 Value = screening.Id.ToString()
             }).ToList();
         }
