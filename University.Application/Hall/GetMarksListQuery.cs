@@ -1,8 +1,8 @@
 ﻿using MediatR;
 
-using University.Models;
+using Cinema.Models;
 
-namespace University.Application.Marks;
+namespace Cinema.Application.Marks;
 
 public class GetMarksListQuery : IRequest<List<Hall>>
 {

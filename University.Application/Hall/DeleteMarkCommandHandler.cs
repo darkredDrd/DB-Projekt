@@ -1,24 +1,24 @@
 ﻿using MediatR;
 
-using University.Persistence;
+using Cinema.Persistence;
 
-namespace University.Application.Marks;
+namespace Cinema.Application.Marks;
 
 public class DeleteMarkCommandHandler : IRequestHandler<DeleteMarkCommand>
 {
-    private readonly UniversityContext context;
+    private readonly CinemaContext context;
 
-    public DeleteMarkCommandHandler(UniversityContext context)
+    public DeleteMarkCommandHandler(CinemaContext context)
     {
         this.context = context;
     }
 
     public async Task Handle(DeleteMarkCommand request, CancellationToken cancellationToken)
     {
-        var mark = await context.Marks.FindAsync(request.Id, cancellationToken);
-        if (mark != null)
+        var hall = await context.Halls.FindAsync(request.Id, cancellationToken);
+        if (hall != null)
         {
-            context.Marks.Remove(mark);
+            context.Halls.Remove(hall);
         }
 
         await context.SaveChangesAsync(cancellationToken);

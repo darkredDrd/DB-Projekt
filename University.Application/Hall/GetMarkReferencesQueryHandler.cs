@@ -2,30 +2,26 @@
 
 using Microsoft.EntityFrameworkCore;
 
-using University.Persistence;
+using Cinema.Persistence;
 
-namespace University.Application.Marks;
+namespace Cinema.Application.Marks;
 
 public class GetMarkReferencesQueryHandler : IRequestHandler<GetMarkReferencesQuery, MarkReferences>
 {
-    private readonly UniversityContext context;
+    private readonly CinemaContext context;
 
-    public GetMarkReferencesQueryHandler(UniversityContext context)
+    public GetMarkReferencesQueryHandler(CinemaContext context)
     {
         this.context = context;
     }
 
     public async Task<MarkReferences> Handle(GetMarkReferencesQuery request, CancellationToken cancellationToken)
     {
-        var allCourses = await context.Courses.ToListAsync(cancellationToken);
-        var allStudents = await context.Students.ToListAsync(cancellationToken);
-        var allTeachers = await context.Teachers.ToListAsync(cancellationToken);
+        var allCinemas = await context.Cinemas.ToListAsync(cancellationToken);
 
         return new MarkReferences
         {
-            Courses = allCourses,
-            Students = allStudents,
-            Teachers = allTeachers
+            Cinemas = allCinemas
         };
     }
 }

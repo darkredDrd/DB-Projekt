@@ -2,50 +2,36 @@
 
 using Microsoft.EntityFrameworkCore;
 
-using University.Models;
-using University.Persistence;
+using Cinema.Models;
+using Cinema.Persistence;
 
-namespace University.Application.Marks;
+namespace Cinema.Application.Marks;
 
 public class CreateMarkCommandHandler : IRequestHandler<CreateMarkCommand>
 {
-    private readonly UniversityContext context;
+    private readonly CinemaContext context;
 
-    public CreateMarkCommandHandler(UniversityContext context)
+    public CreateMarkCommandHandler(CinemaContext context)
     {
         this.context = context;
     }
 
     public async Task Handle(CreateMarkCommand request, CancellationToken cancellationToken)
     {
-        var course = await context.Courses.FirstOrDefaultAsync(c => c.Id == request.CourseId, cancellationToken);
-        if (course == null)
+        var cinema = await context.Cinemas.FirstOrDefaultAsync(c => c.Id == request.CinemaId, cancellationToken);
+        if (cinema == null)
         {
-            throw new NullReferenceException("Course not found");
+            throw new NullReferenceException("Cinema not found");
         }
 
-        var teacher = await context.Teachers.FirstOrDefaultAsync(m => m.Id == request.TeacherId, cancellationToken);
-        if (teacher == null)
+        var hall = new Hall
         {
-            throw new NullReferenceException("Teacher not found");
-        }
-
-        var student = await context.Students.FirstOrDefaultAsync(m => m.Id == request.StudentId, cancellationToken);
-        if (student == null)
-        {
-            throw new NullReferenceException("Student not found");
-        }
-
-        var mark = new Hall
-        {
-            Score = request.Score,
-            DateAwarded = request.DateAwarded,
-            Course = course,
-            Teacher = teacher,
-            Student = student
+            Name = request.Name,
+            Seats = request.Seats,
+            Cinema = cinema
         };
 
-        context.Add(mark);
+        context.Add(hall);
         await context.SaveChangesAsync(cancellationToken);
     }
 }
