@@ -1,8 +1,8 @@
 ﻿using MediatR;
 
-namespace Cinema.Application.Marks;
+namespace Cinema.Application.Hall;
 
-public class UpdateMarkCommand : IRequest
+public class UpdateHallCommand : IRequest
 {
     public int Id { get; set; }
     public string Name { get; set; }

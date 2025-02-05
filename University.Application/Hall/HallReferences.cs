@@ -1,6 +1,6 @@
 ﻿using Cinema.Models;
 
-namespace Cinema.Application.Marks
+namespace Cinema.Application.Hall
 {
     public class RevenueReferences
     {

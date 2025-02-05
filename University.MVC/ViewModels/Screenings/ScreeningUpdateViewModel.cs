@@ -15,13 +15,26 @@ namespace Cinema.MVC.ViewModels.Screenings
         {
             this.Id = screening.Id;
             this.Hall = screening.Hall;
-            this.ScreeningId = screening.Movie.Id;
+            this.MovieId = screening.Movie.Id;
 
             this.Movies = movies.Select(movie => new SelectListItem
             {
-                Text = $"{movie.Movie.Title} - {movie.Date}",
+                Text = $"{movie.Title}",
                 Value = movie.Id.ToString(),
                 Selected = movie.Id == this.MovieId
+            }).ToList();
+        }
+        public ScreeningUpdateViewModel(Screening screening, List<Hall> halls)
+        {
+            this.Id = screening.Id;
+            this.Hall = screening.Hall;
+            this.MovieId = screening.Movie.Id;
+
+            this.Halls = halls.Select(movie => new SelectListItem
+            {
+                Text = $"{hall.Name}",
+                Value = hall.Id.ToString(),
+                Selected = hall.Id == this.HallId
             }).ToList();
         }
 

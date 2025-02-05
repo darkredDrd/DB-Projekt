@@ -5,18 +5,18 @@ using Microsoft.EntityFrameworkCore;
 using Cinema.Models;
 using Cinema.Persistence;
 
-namespace Cinema.Application.Marks;
+namespace Cinema.Application.Hall;
 
-public class CreateMarkCommandHandler : IRequestHandler<CreateMarkCommand>
+public class CreateHallCommandHandler : IRequestHandler<CreateHallCommand>
 {
     private readonly CinemaContext context;
 
-    public CreateMarkCommandHandler(CinemaContext context)
+    public CreateHallCommandHandler(CinemaContext context)
     {
         this.context = context;
     }
 
-    public async Task Handle(CreateMarkCommand request, CancellationToken cancellationToken)
+    public async Task Handle(CreateHallCommand request, CancellationToken cancellationToken)
     {
         var cinema = await context.Cinemas.FirstOrDefaultAsync(c => c.Id == request.CinemaId, cancellationToken);
         if (cinema == null)

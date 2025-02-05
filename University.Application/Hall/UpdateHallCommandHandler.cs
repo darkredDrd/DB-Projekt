@@ -4,18 +4,18 @@ using Microsoft.EntityFrameworkCore;
 
 using Cinema.Persistence;
 
-namespace Cinema.Application.Marks;
+namespace Cinema.Application.Hall;
 
-public class UpdateMarkCommandHandler : IRequestHandler<UpdateMarkCommand>
+public class UpdateHallCommandHandler : IRequestHandler<UpdateHallCommand>
 {
     private readonly CinemaContext context;
 
-    public UpdateMarkCommandHandler(CinemaContext context)
+    public UpdateHallCommandHandler(CinemaContext context)
     {
         this.context = context;
     }
 
-    public async Task Handle(UpdateMarkCommand request, CancellationToken cancellationToken)
+    public async Task Handle(UpdateHallCommand request, CancellationToken cancellationToken)
     {
         var existingHall = await context.Halls
             .Include(hall => hall.Cinema)

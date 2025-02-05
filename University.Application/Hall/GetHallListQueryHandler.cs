@@ -5,18 +5,18 @@ using Microsoft.EntityFrameworkCore;
 using Cinema.Models;
 using Cinema.Persistence;
 
-namespace Cinema.Application.Marks;
+namespace Cinema.Application.Hall;
 
-public class GetMarksListQueryHandler : IRequestHandler<GetMarksListQuery, List<Hall>>
+public class GetHallListQueryHandler : IRequestHandler<GetHallListQuery, List<Hall>>
 {
     private readonly CinemaContext context;
 
-    public GetMarksListQueryHandler(CinemaContext context)
+    public GetHallListQueryHandler(CinemaContext context)
     {
         this.context = context;
     }
 
-    public async Task<List<Hall>> Handle(GetMarksListQuery request, CancellationToken cancellationToken)
+    public async Task<List<Hall>> Handle(GetHallListQuery request, CancellationToken cancellationToken)
     {
         var halls = await context.Halls
             .Include(hall => hall.Cinema)
