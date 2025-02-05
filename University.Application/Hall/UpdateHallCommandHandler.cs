@@ -18,7 +18,7 @@ public class UpdateHallCommandHandler : IRequestHandler<UpdateHallCommand>
     public async Task Handle(UpdateHallCommand request, CancellationToken cancellationToken)
     {
         var existingHall = await context.Halls
-            .Include(hall => hall.Cinema)
+            .Include(hall => hall.Building)
             .FirstOrDefaultAsync(hall => hall.Id == request.Id, cancellationToken);
 
         if (existingHall == null)
@@ -26,15 +26,15 @@ public class UpdateHallCommandHandler : IRequestHandler<UpdateHallCommand>
             throw new NullReferenceException("Hall not found");
         }
 
-        var cinema = await context.Cinemas.FirstOrDefaultAsync(c => c.Id == request.CinemaId, cancellationToken);
-        if (cinema == null)
+        var building = await context.Buildings.FirstOrDefaultAsync(c => c.Id == request.BuildingId, cancellationToken);
+        if (building == null)
         {
-            throw new NullReferenceException("Cinema not found");
+            throw new NullReferenceException("Building not found");
         }
 
         existingHall.Name = request.Name;
         existingHall.Seats = request.Seats;
-        existingHall.Cinema = cinema;
+        existingHall.Building = building;
 
         await context.SaveChangesAsync(cancellationToken);
     }

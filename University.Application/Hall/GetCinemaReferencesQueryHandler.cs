@@ -6,22 +6,22 @@ using Cinema.Persistence;
 
 namespace Cinema.Application.Hall;
 
-public class GetScreeningReferencesQueryHandler : IRequestHandler<GetScreeningReferencesQuery, CinemaReferences>
+public class GetBuildingReferencesQueryHandler : IRequestHandler<GetBuildingReferencesQuery, BuildingReferences>
 {
     private readonly CinemaContext context;
 
-    public GetCinemaReferencesQueryHandler(CinemaContext context)
+    public GetBuildingReferencesQueryHandler(CinemaContext context)
     {
         this.context = context;
     }
 
-    public async Task<CinemaReferences> Handle(GetScreeningReferencesQuery request, CancellationToken cancellationToken)
+    public async Task<BuildingReferences> Handle(GetBuildingReferencesQuery request, CancellationToken cancellationToken)
     {
-        var allCinemas = await context.Cinemas.ToListAsync(cancellationToken);
+        var allBuilding = await context.Buildings.ToListAsync(cancellationToken); //Vielleicht Fehler mit Buildings
 
-        return new CinemaReferences
+        return new BuildingReferences
         {
-            Cinemas = allCinemas
+            Building = allBuilding
         };
     }
 }

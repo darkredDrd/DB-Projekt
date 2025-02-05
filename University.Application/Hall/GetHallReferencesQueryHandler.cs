@@ -6,7 +6,7 @@ using Cinema.Persistence;
 
 namespace Cinema.Application.Hall;
 
-public class GetRevenueReferencesQueryHandler : IRequestHandler<GetHallReferencesQuery, RevenueReferences>
+public class GetHallReferencesQueryHandler : IRequestHandler<GetHallReferencesQuery, HallReferences>
 {
     private readonly CinemaContext context;
 
@@ -15,13 +15,13 @@ public class GetRevenueReferencesQueryHandler : IRequestHandler<GetHallReference
         this.context = context;
     }
 
-    public async Task<RevenueReferences> Handle(GetHallReferencesQuery request, CancellationToken cancellationToken)
+    public async Task<HallReferences> Handle(GetHallReferencesQuery request, CancellationToken cancellationToken)
     {
-        var allCinemas = await context.Cinemas.ToListAsync(cancellationToken);
+        var allBuildings = await context.Buildings.ToListAsync(cancellationToken);
 
         return new RevenueReferences
         {
-            Cinemas = allCinemas
+            Buildings = allBuildings
         };
     }
 }

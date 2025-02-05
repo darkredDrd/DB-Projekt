@@ -2,6 +2,6 @@
 
 namespace Cinema.Application.Hall;
 
-public class GetHallReferencesQuery : IRequest<RevenueReferences>
+public class GetHallReferencesQuery : IRequest<HallReferences>
 {
 }

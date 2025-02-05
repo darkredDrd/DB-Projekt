@@ -19,7 +19,7 @@ public class GetHallQueryQueryHandler : IRequestHandler<GetHallQuery, Hall>
     public async Task<Hall> Handle(GetHallQuery request, CancellationToken cancellationToken)
     {
         var hall = await context.Halls
-            .Include(hall => hall.Cinema)
+            .Include(hall => hall.Building)
             .FirstOrDefaultAsync(hall => hall.Id == request.Id, cancellationToken);
 
         return hall;

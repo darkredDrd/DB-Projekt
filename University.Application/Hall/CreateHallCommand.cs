@@ -6,6 +6,6 @@ namespace Cinema.Application.Hall;
     {
         public string Name { get; set; }
         public int Seats { get; set; }
-        public int CinemaId { get; set; }
+        public int BuildingId { get; set; }
     }
 }

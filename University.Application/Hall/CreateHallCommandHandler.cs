@@ -18,17 +18,17 @@ public class CreateHallCommandHandler : IRequestHandler<CreateHallCommand>
 
     public async Task Handle(CreateHallCommand request, CancellationToken cancellationToken)
     {
-        var cinema = await context.Cinemas.FirstOrDefaultAsync(c => c.Id == request.CinemaId, cancellationToken);
-        if (cinema == null)
+        var building = await context.Buildings.FirstOrDefaultAsync(c => c.Id == request.BuildingId, cancellationToken);
+        if (building == null)
         {
-            throw new NullReferenceException("Cinema not found");
+            throw new NullReferenceException("Building not found");
         }
 
         var hall = new Hall
         {
             Name = request.Name,
             Seats = request.Seats,
-            Cinema = cinema
+            Building = building
         };
 
         context.Add(hall);
