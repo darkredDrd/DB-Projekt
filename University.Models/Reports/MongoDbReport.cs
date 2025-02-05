@@ -8,14 +8,14 @@ namespace Cinema.Models.Reports
 
         public DateTime GeneratedDate { get; set; }
 
-        public List<MongoDbStudent> Students { get; set; }
+        public List<MongoDbActor> Students { get; set; }
 
         public static MongoDbReport FromReport(Screening report)
         {
             return new MongoDbReport
             {
                 GeneratedDate = report.GeneratedDate,
-                Students = report.Students.Select(MongoDbStudent.FromStudent).ToList()
+                Students = report.Students.Select(MongoDbActor.FromStudent).ToList()
             };
         }
 
