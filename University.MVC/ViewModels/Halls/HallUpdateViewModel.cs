@@ -2,7 +2,7 @@
 
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-using Cinema.Application.Marks;
+using Cinema.Application.Hall;
 using Cinema.Models;
 
 namespace Cinema.MVC.ViewModels.Halls
@@ -13,18 +13,18 @@ namespace Cinema.MVC.ViewModels.Halls
         {
         }
 
-        public HallUpdateViewModel(Hall hall, List<Cinema> cinemas)
+        public HallUpdateViewModel(Hall hall, List<Building> buildings)
         {
             this.Id = hall.Id;
             this.Name = hall.Name;
             this.Seats = hall.Seats;
-            this.CinemaId = hall.Cinema.Id;
+            this.BuildingId = hall.Building.Id;
 
-            this.Cinemas = cinemas.Select(cinema => new SelectListItem
+            this.Buildings = buildings.Select(building => new SelectListItem
             {
-                Text = cinema.Name,
-                Value = cinema.Id.ToString(),
-                Selected = cinema.Id == this.CinemaId
+                Text = building.Name,
+                Value = building.Id.ToString(),
+                Selected = building.Id == this.BuildingId
             }).ToList();
         }
 
@@ -39,22 +39,22 @@ namespace Cinema.MVC.ViewModels.Halls
         [Range(1, 500)]
         public int Seats { get; set; }
 
-        public List<SelectListItem> Cinemas { get; set; }
+        public List<SelectListItem> Buildings { get; set; }
 
         [Required]
-        public int CinemaId { get; set; }
+        public int BuildingId { get; set; }
 
-        public UpdateMarkCommand ToCommand()
+        public UpdateHallCommand ToCommand()
         {
-            var updateMarkCommand = new UpdateMarkCommand
+            var updateHallCommand = new UpdateHallCommand
             {
                 Id = this.Id,
                 Name = this.Name,
                 Seats = this.Seats,
-                CinemaId = this.CinemaId
+                BuildingId = this.BuildingId
             };
 
-            return updateMarkCommand;
+            return updateHallCommand;
         }
     }
 }

@@ -14,8 +14,8 @@ public class HallListViewModel
     [Display(Name = "Number of Seats")]
     public int Seats { get; set; }
 
-    [Display(Name = "Cinema")]
-    public string CinemaName { get; set; }
+    [Display(Name = "Building")]
+    public string BuildingName { get; set; }
 
     public static HallListViewModel FromHall(Hall hall)
     {
@@ -24,7 +24,7 @@ public class HallListViewModel
             Id = hall.Id,
             Name = hall.Name,
             Seats = hall.Seats,
-            CinemaName = hall.Cinema.Name
+            BuildingName = hall.Building.Name
         };
 
         return hallListViewModel;

@@ -2,7 +2,7 @@
 
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-using Cinema.Application.Marks;
+using Cinema.Application.Hall;
 using Cinema.Models;
 
 namespace Cinema.MVC.ViewModels.Halls
@@ -13,12 +13,12 @@ namespace Cinema.MVC.ViewModels.Halls
         {
         }
 
-        public HallCreateViewModel(List<Cinema> cinemas)
+        public HallCreateViewModel(List<Building> buildings)
         {
-            this.Cinemas = cinemas.Select(cinema => new SelectListItem
+            this.Buildings = buildings.Select(building => new SelectListItem
             {
-                Text = cinema.Name,
-                Value = cinema.Id.ToString()
+                Text = building.Name,
+                Value = building.Id.ToString()
             }).ToList();
         }
 
@@ -30,21 +30,21 @@ namespace Cinema.MVC.ViewModels.Halls
         [Range(1, 500)]
         public int Seats { get; set; }
 
-        public List<SelectListItem> Cinemas { get; set; }
+        public List<SelectListItem> Buildings { get; set; }
 
         [Required]
-        public int CinemaId { get; set; }
+        public int BuildingId { get; set; }
 
-        public CreateMarkCommand ToCommand()
+        public CreateHallCommand ToCommand()
         {
-            var createMarkCommand = new CreateMarkCommand
+            var createHallCommand = new CreateHallCommand
             {
                 Name = this.Name,
                 Seats = this.Seats,
-                CinemaId = this.CinemaId
+                BuildingId = this.BuildingId
             };
 
-            return createMarkCommand;
+            return createHallCommand;
         }
     }
 }
