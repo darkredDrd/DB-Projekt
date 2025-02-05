@@ -5,10 +5,10 @@ using MongoDB.Driver;
 
 using StackExchange.Redis;
 
-using University.Application.Marks;
-using University.Persistence;
+using Cinema.Application.Marks;
+using Cinema.Persistence;
 
-namespace University.MVC
+namespace Cinema.MVC
 {
     public class Program
     {
@@ -18,7 +18,7 @@ namespace University.MVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddDbContext<UniversityContext>(
+            builder.Services.AddDbContext<CinemaContext>(
                 dbContextOptionsBuilder => dbContextOptionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("UniversityDb")));
 
             builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreateMarkCommand>());
