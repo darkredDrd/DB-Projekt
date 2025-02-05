@@ -1,8 +1,8 @@
 ﻿using Cinema.Models;
 
-namespace Cinema.Application.Marks;
+namespace Cinema.Application.Hall;
 
-public class CourseReferences
+public class CinemaReferences
 {
     public List<Cinema> Cinemas { get; set; }
 }

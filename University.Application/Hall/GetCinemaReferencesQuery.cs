@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Cinema.Application.Marks;
+namespace Cinema.Application.Hall;
 
 public class GetScreeningReferencesQuery : IRequest<CourseReferences>
 {

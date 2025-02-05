@@ -1,8 +1,8 @@
 ﻿using MediatR;
 
-namespace Cinema.Application.Marks
+namespace Cinema.Application.Hall;
 {
-    public class CreateMarkCommand : IRequest
+    public class CreateHallCommand : IRequest
     {
         public string Name { get; set; }
         public int Seats { get; set; }

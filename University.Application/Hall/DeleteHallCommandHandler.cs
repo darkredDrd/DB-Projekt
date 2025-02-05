@@ -2,18 +2,18 @@
 
 using Cinema.Persistence;
 
-namespace Cinema.Application.Marks;
+namespace Cinema.Application.Hall;
 
-public class DeleteMarkCommandHandler : IRequestHandler<DeleteMarkCommand>
+public class DeleteHallCommandHandler : IRequestHandler<DeleteHallCommand>
 {
     private readonly CinemaContext context;
 
-    public DeleteMarkCommandHandler(CinemaContext context)
+    public DeleteHallCommandHandler(CinemaContext context)
     {
         this.context = context;
     }
 
-    public async Task Handle(DeleteMarkCommand request, CancellationToken cancellationToken)
+    public async Task Handle(DeleteHallCommand request, CancellationToken cancellationToken)
     {
         var hall = await context.Halls.FindAsync(request.Id, cancellationToken);
         if (hall != null)
