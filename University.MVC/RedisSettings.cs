@@ -1,4 +1,4 @@
-namespace University.MVC;
+namespace Cinema.MVC;
 
 public class RedisSettings
 {
