@@ -8,7 +8,7 @@ using Cinema.Models;
 using Cinema.Persistence;
 using Cinema.Application.Screenings;
 
-namespace Cinema.Application.Revenues;
+namespace Cinema.Application.Screenings;
 
 public class GetScreeningQueryHandler : IRequestHandler<GetScreeningQuery, Screening>
 {
