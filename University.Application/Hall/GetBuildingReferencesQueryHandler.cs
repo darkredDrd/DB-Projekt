@@ -1,8 +1,8 @@
 ﻿using MediatR;
 
-using Microsoft.EntityFrameworkCores;
 
 using Cinema.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cinema.Application.Halls;
 
