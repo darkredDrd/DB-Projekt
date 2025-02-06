@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using University.Persistence;
+using Cinema.Persistence;
 
 #nullable disable
 
-namespace University.Persistence.Migrations
+namespace Cinema.Persistence.Migrations
 {
-    [DbContext(typeof(UniversityContext))]
-    partial class UniversityContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(CinemaContext))]
+    partial class CinemaContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -22,37 +22,37 @@ namespace University.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CourseStudent", b =>
+            modelBuilder.Entity("MovieActor", b =>
                 {
-                    b.Property<int>("CoursesId")
+                    b.Property<int>("MoviesId")
                         .HasColumnType("int");
 
-                    b.Property<int>("StudentsId")
+                    b.Property<int>("ActorsId")
                         .HasColumnType("int");
 
-                    b.HasKey("CoursesId", "StudentsId");
+                    b.HasKey("MoviesId", "ActorsId");
 
-                    b.HasIndex("StudentsId");
+                    b.HasIndex("ActorsId");
 
-                    b.ToTable("CourseStudent");
+                    b.ToTable("MovieActor");
                 });
 
-            modelBuilder.Entity("CourseTeacher", b =>
+            modelBuilder.Entity("MovieTeacher", b =>
                 {
-                    b.Property<int>("CoursesId")
+                    b.Property<int>("MoviesId")
                         .HasColumnType("int");
 
                     b.Property<int>("TeachersId")
                         .HasColumnType("int");
 
-                    b.HasKey("CoursesId", "TeachersId");
+                    b.HasKey("MoviesId", "TeachersId");
 
                     b.HasIndex("TeachersId");
 
-                    b.ToTable("CourseTeacher");
+                    b.ToTable("MovieTeacher");
                 });
 
-            modelBuilder.Entity("University.Models.Course", b =>
+            modelBuilder.Entity("Cinema.Models.Movie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -76,10 +76,10 @@ namespace University.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("University.Models.Mark", b =>
+            modelBuilder.Entity("Cinema.Models.Mark", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -87,7 +87,7 @@ namespace University.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CourseId")
+                    b.Property<int?>("MovieId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateAwarded")
@@ -96,7 +96,7 @@ namespace University.Persistence.Migrations
                     b.Property<int>("Score")
                         .HasColumnType("int");
 
-                    b.Property<int?>("StudentId")
+                    b.Property<int?>("ActorId")
                         .HasColumnType("int");
 
                     b.Property<int?>("TeacherId")
@@ -104,16 +104,16 @@ namespace University.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseId");
+                    b.HasIndex("MovieId");
 
-                    b.HasIndex("StudentId");
+                    b.HasIndex("ActorId");
 
                     b.HasIndex("TeacherId");
 
                     b.ToTable("Marks");
                 });
 
-            modelBuilder.Entity("University.Models.Student", b =>
+            modelBuilder.Entity("Cinema.Models.Actor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -121,13 +121,8 @@ namespace University.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime?>("Birthday")
+                    b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -139,21 +134,12 @@ namespace University.Persistence.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("PassportNumber")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.Property<string>("Phone")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Students");
+                    b.ToTable("Actors");
                 });
 
-            modelBuilder.Entity("University.Models.Teacher", b =>
+            modelBuilder.Entity("Cinema.Models.Teacher", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -193,68 +179,68 @@ namespace University.Persistence.Migrations
                     b.ToTable("Teachers");
                 });
 
-            modelBuilder.Entity("CourseStudent", b =>
+            modelBuilder.Entity("MovieActor", b =>
                 {
-                    b.HasOne("University.Models.Course", null)
+                    b.HasOne("Cinema.Models.Movie", null)
                         .WithMany()
-                        .HasForeignKey("CoursesId")
+                        .HasForeignKey("MoviesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("University.Models.Student", null)
+                    b.HasOne("Cinema.Models.Actor", null)
                         .WithMany()
-                        .HasForeignKey("StudentsId")
+                        .HasForeignKey("ActorsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CourseTeacher", b =>
+            modelBuilder.Entity("MovieTeacher", b =>
                 {
-                    b.HasOne("University.Models.Course", null)
+                    b.HasOne("Cinema.Models.Movie", null)
                         .WithMany()
-                        .HasForeignKey("CoursesId")
+                        .HasForeignKey("MoviesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("University.Models.Teacher", null)
+                    b.HasOne("Cinema.Models.Teacher", null)
                         .WithMany()
                         .HasForeignKey("TeachersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("University.Models.Mark", b =>
+            modelBuilder.Entity("Cinema.Models.Mark", b =>
                 {
-                    b.HasOne("University.Models.Course", "Course")
+                    b.HasOne("Cinema.Models.Movie", "Movie")
                         .WithMany("Marks")
-                        .HasForeignKey("CourseId");
+                        .HasForeignKey("MovieId");
 
-                    b.HasOne("University.Models.Student", "Student")
+                    b.HasOne("Cinema.Models.Actor", "Actor")
                         .WithMany("Marks")
-                        .HasForeignKey("StudentId");
+                        .HasForeignKey("ActorId");
 
-                    b.HasOne("University.Models.Teacher", "Teacher")
+                    b.HasOne("Cinema.Models.Teacher", "Teacher")
                         .WithMany("Marks")
                         .HasForeignKey("TeacherId");
 
-                    b.Navigation("Course");
+                    b.Navigation("Movie");
 
-                    b.Navigation("Student");
+                    b.Navigation("Actor");
 
                     b.Navigation("Teacher");
                 });
 
-            modelBuilder.Entity("University.Models.Course", b =>
+            modelBuilder.Entity("Cinema.Models.Movie", b =>
                 {
                     b.Navigation("Marks");
                 });
 
-            modelBuilder.Entity("University.Models.Student", b =>
+            modelBuilder.Entity("Cinema.Models.Actor", b =>
                 {
                     b.Navigation("Marks");
                 });
 
-            modelBuilder.Entity("University.Models.Teacher", b =>
+            modelBuilder.Entity("Cinema.Models.Teacher", b =>
                 {
                     b.Navigation("Marks");
                 });
