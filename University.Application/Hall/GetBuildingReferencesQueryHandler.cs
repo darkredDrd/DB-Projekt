@@ -1,10 +1,10 @@
 ﻿using MediatR;
 
-using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCores;
 
 using Cinema.Persistence;
 
-namespace Cinema.Application.Hall;
+namespace Cinema.Application.Halls;
 
 public class GetBuildingReferencesQueryHandler : IRequestHandler<GetBuildingReferencesQuery, BuildingReferences>
 {

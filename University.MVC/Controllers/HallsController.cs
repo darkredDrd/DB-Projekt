@@ -2,7 +2,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 
-using Cinema.Application.Hall;
+using Cinema.Application.Halls;
 using Cinema.MVC.ViewModels.Halls;
 
 namespace Cinema.MVC.Controllers

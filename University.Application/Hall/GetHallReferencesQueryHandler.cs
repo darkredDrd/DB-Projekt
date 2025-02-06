@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 using Cinema.Persistence;
 
-namespace Cinema.Application.Hall;
+namespace Cinema.Application.Halls;
 
 public class GetHallReferencesQueryHandler : IRequestHandler<GetHallReferencesQuery, HallReferences>
 {

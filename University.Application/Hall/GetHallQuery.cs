@@ -2,7 +2,7 @@
 
 using Cinema.Models;
 
-namespace Cinema.Application.Hall;
+namespace Cinema.Application.Halls;
 
 public class GetHallQuery : IRequest<Hall>
 {

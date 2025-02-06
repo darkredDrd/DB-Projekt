@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Cinema.Application.Hall;
+namespace Cinema.Application.Halls;
 
 public class DeleteHallCommand : IRequest
 {
