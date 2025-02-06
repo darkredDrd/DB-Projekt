@@ -23,7 +23,7 @@ public class DeleteScreeningCommandHandler : IRequestHandler<DeleteScreeningComm
         var screening = await context.Screenings.FindAsync(request.Id, cancellationToken);
         if (screening != null)
         {
-            context.Revenues.Remove(screening);
+            context.Screenings.Remove(screening);
         }
 
         await context.SaveChangesAsync(cancellationToken);

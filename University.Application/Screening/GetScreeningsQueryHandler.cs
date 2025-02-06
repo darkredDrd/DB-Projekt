@@ -16,7 +16,7 @@ public class GetScreeningsQueryHandler : IRequestHandler<GetScreeningsQuery, Lis
         this.context = context;
     }
 
-    public async Task<List<Revenue>> Handle(GetScreeningsQuery request, CancellationToken cancellationToken)
+    public async Task<List<Screening>> Handle(GetScreeningsQuery request, CancellationToken cancellationToken)
     {
         var screenings = await context.Screenings.ToListAsync(cancellationToken);
         return screenings;

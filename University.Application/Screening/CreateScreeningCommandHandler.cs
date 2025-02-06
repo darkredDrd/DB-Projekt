@@ -18,13 +18,13 @@ public class CreateScreeningCommandHandler : IRequestHandler<CreateScreeningComm
 
     public async Task Handle(CreateScreeningCommand request, CancellationToken cancellationToken)
     {
-        var movie = await context.Screenings.FirstOrDefaultAsync(s => s.Id == request.MovieID, cancellationToken);
+        var movie = await context.Movies.FirstOrDefaultAsync(s => s.Id == request.MovieID, cancellationToken);
         if (movie == null)
         {
             throw new NullReferenceException("Movie not found");
         }
 
-        var hall = await context.Screenings.FirstOrDefaultAsync(s => s.Id == request.HallID, cancellationToken);
+        var hall = await context.Halls.FirstOrDefaultAsync(s => s.Id == request.HallID, cancellationToken);
         if (movie == null)
         {
             throw new NullReferenceException("Hall not found");

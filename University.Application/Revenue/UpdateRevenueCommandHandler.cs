@@ -5,6 +5,7 @@ using Microsoft.Extensions.Caching.Distributed;
 
 using Cinema.Models;
 using Cinema.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cinema.Application.Revenues;
 

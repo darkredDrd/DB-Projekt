@@ -5,6 +5,7 @@ using Microsoft.Extensions.Caching.Distributed;
 
 using Cinema.Models;
 using Cinema.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cinema.Application.Screenings;
 
@@ -21,7 +22,7 @@ public class UpdateScreeningCommandHandler : IRequestHandler<UpdateScreeningComm
     {
         var existingScreening = await context.Screenings
             .Include(screening => screening.Movie)
-            .include(Screening => Screening.Hall)
+            .Include(Screening => Screening.Hall)
             .FirstOrDefaultAsync(screening => screening.Id == request.Id, cancellationToken);
 
         if (existingScreening == null)
@@ -35,7 +36,7 @@ public class UpdateScreeningCommandHandler : IRequestHandler<UpdateScreeningComm
             throw new NullReferenceException("Movie not found");
         }
 
-        var hall = await context.Movies.FirstOrDefaultAsync(s => s.Id == request.HallId, cancellationToken);
+        var hall = await context.Halls.FirstOrDefaultAsync(s => s.Id == request.HallId, cancellationToken);
         if (hall == null)
         {
             throw new NullReferenceException("Hall not found");
