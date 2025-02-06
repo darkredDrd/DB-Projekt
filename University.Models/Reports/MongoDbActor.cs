@@ -18,11 +18,11 @@
             };
 
             var courseGroups = actor.Marks.GroupBy(mark => mark.Course);//Marks gibt es nicht mehr was dann 
-            mongoDbActor.Courses = courseGroups.Select(courseGroup => new MongoDbCourse
+            mongoDbActor.Courses = courseGroups.Select(courseGroup => new MongoDbMovie
             {
                 Topic = courseGroup.Key.Topic,
                 TotalScore = courseGroup.Sum(mark => mark.Score),
-                Marks = courseGroup.Select(MongoDbMark.FromMark).ToList()
+                Movies = courseGroup.Select(MongoDbMark.FromMark).ToList()
             }).ToList();
 
             return mongoDbActor;

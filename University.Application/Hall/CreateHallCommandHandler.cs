@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Cinema.Models;
 using Cinema.Persistence;
 
-namespace Cinema.Application.Hall;
+namespace Cinema.Application.Halls;
 
 public class CreateHallCommandHandler : IRequestHandler<CreateHallCommand>
 {
