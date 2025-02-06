@@ -55,6 +55,7 @@ namespace Cinema.MVC.ViewModels.Screenings
         public int HallId { get; set; }
 
         public List<SelectListItem> Movies { get; set; }
+        public List<SelectListItem> Hall { get; set; }
 
         public UpdateScreeningCommand ToCommand()
         {

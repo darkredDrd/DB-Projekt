@@ -43,6 +43,7 @@ namespace Cinema.MVC.ViewModels.Screenings
         public DateTime DateTime { get; set; }
 
         public List<SelectListItem> Movies { get; set; }
+        public List<SelectListItem> Halls { get; set; }
 
         public CreateScreeningCommand ToCommand()
         {
