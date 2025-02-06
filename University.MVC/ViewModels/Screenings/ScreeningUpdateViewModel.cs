@@ -11,28 +11,23 @@ namespace Cinema.MVC.ViewModels.Screenings
         {
         }
 
-        public ScreeningUpdateViewModel(Screening screening, List<Movie> movies)
+        public ScreeningUpdateViewModel(Screening screening, List<Movie> movies, List<Hall> halls)
         {
             this.Id = screening.Id;
-            this.Hall= screening.Hall;
+            this.DateTime = screening.DateTime;
             this.MovieId = screening.Movie.Id;
+            this.HallId = screening.Hall.Id;
 
             this.Movies = movies.Select(movie => new SelectListItem
             {
-                Text = $"{movie.Title}",
+                Text = movie.Title,
                 Value = movie.Id.ToString(),
                 Selected = movie.Id == this.MovieId
             }).ToList();
-        }
-        public ScreeningUpdateViewModel(Screening screening, List<Hall> halls)
-        {
-            this.Id = screening.Id;
-            this.Hall = screening.Hall;
-            this.MovieId = screening.Movie.Id;
 
-            this.Halls = halls.Select(movie => new SelectListItem
+            this.Halls = halls.Select(hall => new SelectListItem
             {
-                Text = $"{hall.Name}",
+                Text = hall.Name,
                 Value = hall.Id.ToString(),
                 Selected = hall.Id == this.HallId
             }).ToList();
@@ -55,7 +50,7 @@ namespace Cinema.MVC.ViewModels.Screenings
         public int HallId { get; set; }
 
         public List<SelectListItem> Movies { get; set; }
-        public List<SelectListItem> Hall { get; set; }
+        public List<SelectListItem> Halls { get; set; }
 
         public UpdateScreeningCommand ToCommand()
         {
