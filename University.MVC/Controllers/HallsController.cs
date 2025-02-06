@@ -2,10 +2,10 @@
 
 using Microsoft.AspNetCore.Mvc;
 
-using University.Application.Hall;
-using University.MVC.ViewModels.Halls;
+using Cinema.Application.Hall;
+using Cinema.MVC.ViewModels.Halls;
 
-namespace University.MVC.Controllers
+namespace Cinema.MVC.Controllers
 {
     public class HallsController : Controller
     {
@@ -19,21 +19,21 @@ namespace University.MVC.Controllers
         // GET: HallsController
         public async Task<ActionResult> Index()
         {
-            var getHallsListQuery = new GetHallsListQuery();
-            var halls = await mediator.Send(getHallsListQuery);
+            var getHallListQuery = new GetHallListQuery();
+            var halls = await mediator.Send(getHallListQuery);
 
-            var hallListViewModels = halls.Select(RevenueListViewModel.FromHall);
+            var hallListViewModels = halls.Select(HallListViewModel.FromHall);
 
             return View(hallListViewModels);
         }
 
-        // GET: MarksController/Details/5
+        // GET: HallsController/Details/5
         public async Task<ActionResult> Details(int id)
         {
             var getHallQuery = new GetHallQuery { Id = id };
             var hall = await mediator.Send(getHallQuery);
 
-            var hallDetailsViewModel = RevenueDetailsViewModel.FromHall(hall);
+            var hallDetailsViewModel = HallDetailsViewModel.FromHall(hall);
 
             return View(hallDetailsViewModel);
         }
@@ -52,7 +52,7 @@ namespace University.MVC.Controllers
         // POST: HallsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(RevenueCreateViewModel hallCreateViewModel)
+        public async Task<ActionResult> Create(HallCreateViewModel hallCreateViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +70,7 @@ namespace University.MVC.Controllers
         public async Task<ActionResult> Edit(int id)
         {
             var getHallReferencesQuery = new GetHallReferencesQuery();
-            var hallReferences = await this.mediator.Send(getHallrencesQuery);
+            var hallReferences = await this.mediator.Send(getHallReferencesQuery);
 
             var getHallQuery = new GetHallQuery { Id = id };
             var hall = await mediator.Send(getHallQuery);
@@ -83,7 +83,7 @@ namespace University.MVC.Controllers
         // POST: HallsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(int id, RevenueUpdateViewModel hallUpdateViewModel)
+        public async Task<ActionResult> Edit(int id, HallUpdateViewModel hallUpdateViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -103,7 +103,7 @@ namespace University.MVC.Controllers
             var getHallQuery = new GetHallQuery { Id = id };
             var hall = await mediator.Send(getHallQuery);
 
-            var hallDetailsViewModel = RevenueDetailsViewModel.FromHall(hall);
+            var hallDetailsViewModel = HallDetailsViewModel.FromHall(hall);
 
             return View(hallDetailsViewModel);
         }

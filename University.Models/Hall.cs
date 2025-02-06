@@ -8,7 +8,7 @@ public class Hall
 
     public int Seats { get; set; }
 
-    public Cinema Cinema { get; set; }
+    public Building Building { get; set; }
  
 }
 }

@@ -17,11 +17,11 @@ public class GetBuildingReferencesQueryHandler : IRequestHandler<GetBuildingRefe
 
     public async Task<BuildingReferences> Handle(GetBuildingReferencesQuery request, CancellationToken cancellationToken)
     {
-        var allBuilding = await context.Buildings.ToListAsync(cancellationToken); //Vielleicht Fehler mit Buildings
+        var allBuildings = await context.Buildings.ToListAsync(cancellationToken);
 
         return new BuildingReferences
         {
-            Building = allBuilding
+            Buildings = allBuildings
         };
     }
 }

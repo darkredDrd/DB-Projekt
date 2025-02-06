@@ -19,7 +19,7 @@ public class GetHallReferencesQueryHandler : IRequestHandler<GetHallReferencesQu
     {
         var allBuildings = await context.Buildings.ToListAsync(cancellationToken);
 
-        return new RevenueReferences
+        return new HallReferences
         {
             Buildings = allBuildings
         };

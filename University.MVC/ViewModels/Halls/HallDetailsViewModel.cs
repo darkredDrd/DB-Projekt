@@ -15,7 +15,7 @@ public class HallDetailsViewModel
     public int Seats { get; set; }
 
     [Display(Name = "Building")]
-    public string CinemaName { get; set; }
+    public string BuildingName { get; set; }
 
     public static HallDetailsViewModel FromHall(Hall hall)
     {
