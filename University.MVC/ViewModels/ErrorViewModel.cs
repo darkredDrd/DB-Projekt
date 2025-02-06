@@ -1,4 +1,4 @@
-namespace University.MVC.ViewModels
+namespace Cinema.MVC.ViewModels
 {
     public class ErrorViewModel
     {
