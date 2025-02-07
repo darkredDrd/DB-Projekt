@@ -8,5 +8,7 @@ public class Building
 
     public string Address { get; set; }
 
-}
+    public List<Hall> Halls { get; set; }
+
+    }
 }

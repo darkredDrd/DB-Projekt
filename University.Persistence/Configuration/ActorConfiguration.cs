@@ -14,8 +14,8 @@ namespace Cinema.Persistence.Configuration
             builder.Property(actor => actor.FirstName).HasMaxLength(50).IsRequired();
             builder.Property(actor => actor.LastName).HasMaxLength(100).IsRequired();
 
-            builder.HasMany(actor => actor.Movie)
-                .WithMany(course => course.Actors);
+            builder.HasMany(actor => actor.Movies)
+                .WithMany(movie => movie.Actors);
         }
     }
 }

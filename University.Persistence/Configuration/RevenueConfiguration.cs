@@ -11,7 +11,7 @@ public class RevenueConfiguration : IEntityTypeConfiguration<Revenue>
         builder.HasKey(revenue => revenue.Id);
 
         builder.HasOne(revenue => revenue.Screening)
-            .WithMany()
+            .WithOne(screening => screening.Revenue)
             .HasForeignKey("ScreeningId")
             .OnDelete(DeleteBehavior.Cascade);
 

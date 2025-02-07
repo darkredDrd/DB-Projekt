@@ -9,6 +9,8 @@ public class Hall
     public int Seats { get; set; }
 
     public Building Building { get; set; }
+
+    public Building BuildingId { get; set; }
  
 }
 }

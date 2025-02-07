@@ -9,5 +9,6 @@ public class Movie
     public string Genre { get; set; }
 
     public int DurationMinutes { get; set; }
-}
+    public List<Actor> Actors { get; set; }
+    }
 }

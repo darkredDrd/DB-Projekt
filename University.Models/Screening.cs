@@ -11,6 +11,8 @@ namespace Cinema.Models
 
         public Hall Hall { get; set; }
 
+        public Revenue Revenue { get; set; }
+
 
     }
 }

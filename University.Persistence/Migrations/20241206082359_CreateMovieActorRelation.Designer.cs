@@ -12,11 +12,11 @@ using Cinema.Persistence;
 namespace Cinema.Persistence.Migrations
 {
     [DbContext(typeof(CinemaContext))]
-    [Migration("20241206082359_CreateCourseStudentRelation")]
-    partial class CreateCourseStudentRelation
+    [Migration("20241206082359_CreateMovieActorRelation")]
+    partial class CreateMovieActorRelation
     {
         /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,22 +25,22 @@ namespace Cinema.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CourseStudent", b =>
+            modelBuilder.Entity("MovieActor", b =>
                 {
-                    b.Property<int>("CoursesId")
+                    b.Property<int>("MoviesId")
                         .HasColumnType("int");
 
-                    b.Property<int>("StudentsId")
+                    b.Property<int>("ActorsId")
                         .HasColumnType("int");
 
-                    b.HasKey("CoursesId", "StudentsId");
+                    b.HasKey("MoviesId", "ActorsId");
 
-                    b.HasIndex("StudentsId");
+                    b.HasIndex("ActorsId");
 
-                    b.ToTable("CourseStudent");
+                    b.ToTable("MovieActor");
                 });
 
-            modelBuilder.Entity("Cinema.Models.Course", b =>
+            modelBuilder.Entity("Cinema.Models.Movie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -48,26 +48,25 @@ namespace Cinema.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Genre")
+                        .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("NumberOfHours")
+                    b.Property<int>("DurationMinutes")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
 
-                    b.Property<string>("Topic")
+
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("Cinema.Models.Student", b =>
+            modelBuilder.Entity("Cinema.Models.Actor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -75,13 +74,9 @@ namespace Cinema.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime?>("Birthday")
+                    b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -93,31 +88,23 @@ namespace Cinema.Persistence.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("PassportNumber")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.Property<string>("Phone")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Students");
+                    b.ToTable("Actors");
                 });
 
-            modelBuilder.Entity("CourseStudent", b =>
+            modelBuilder.Entity("MovieActor", b =>
                 {
-                    b.HasOne("Cinema.Models.Course", null)
+                    b.HasOne("Cinema.Models.Movie", null)
                         .WithMany()
-                        .HasForeignKey("CoursesId")
+                        .HasForeignKey("MoviesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Cinema.Models.Student", null)
+                    b.HasOne("Cinema.Models.Actor", null)
                         .WithMany()
-                        .HasForeignKey("StudentsId")
+                        .HasForeignKey("ActorsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -125,3 +112,4 @@ namespace Cinema.Persistence.Migrations
         }
     }
 }
+
