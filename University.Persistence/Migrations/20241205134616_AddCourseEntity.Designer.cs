@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using University.Persistence;
+using Cinema.Persistence;
 
 #nullable disable
 
-namespace University.Persistence.Migrations
+namespace Cinema.Persistence.Migrations
 {
-    [DbContext(typeof(UniversityContext))]
+    [DbContext(typeof(CinemaContext))]
     [Migration("20241205134616_AddCourseEntity")]
     partial class AddCourseEntity
     {
@@ -25,7 +25,7 @@ namespace University.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("University.Models.Course", b =>
+            modelBuilder.Entity("Cinema.Models.Course", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -52,7 +52,7 @@ namespace University.Persistence.Migrations
                     b.ToTable("Course");
                 });
 
-            modelBuilder.Entity("University.Models.Student", b =>
+            modelBuilder.Entity("Cinema.Models.Student", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

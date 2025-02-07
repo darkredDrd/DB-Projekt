@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace University.Persistence.Migrations
+namespace Cinema.Persistence.Migrations
 {
     /// <inheritdoc />
     public partial class RenameCoursesTable : Migration

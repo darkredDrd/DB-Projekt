@@ -5,7 +5,7 @@ using MongoDB.Driver;
 
 using StackExchange.Redis;
 
-using Cinema.Application.Marks;
+using Cinema.Application.Halls;
 using Cinema.Persistence;
 
 namespace Cinema.MVC
@@ -19,9 +19,9 @@ namespace Cinema.MVC
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<CinemaContext>(
-                dbContextOptionsBuilder => dbContextOptionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("UniversityDb")));
+                dbContextOptionsBuilder => dbContextOptionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("CinemaDb")));
 
-            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreateMarkCommand>());
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreateHallCommand>());
 
             builder.Services.Configure<MongoDbSettings>(mongoDbSettings => builder.Configuration.GetSection("MongoDbSettings").Bind(mongoDbSettings));
 
@@ -29,7 +29,7 @@ namespace Cinema.MVC
             {
                 var mongoDbSettings = serviceProvider.GetService<IOptions<MongoDbSettings>>().Value;
                 var client = new MongoClient(mongoDbSettings.ConnectionString);
-                var mongoDatabase = client.GetDatabase(mongoDbSettings.UniversityDbName) as MongoDatabaseBase;
+                var mongoDatabase = client.GetDatabase(mongoDbSettings.CinemaDbName);
 
                 return mongoDatabase;
             });

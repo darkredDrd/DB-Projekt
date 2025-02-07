@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>83ffc723-ded1-4777-a8d4-2982d27cb83b</UserSecretsId>
   </PropertyGroup>
 
 	<ItemGroup>
@@ -21,14 +22,14 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.11" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
 		<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="8.0.11" />
-		<PackageReference Include="MongoDB.Driver" Version="2.19.0" />
+		<PackageReference Include="MongoDB.Driver" Version="3.0.0" />
 		<PackageReference Include="StackExchange.Redis" Version="2.6.104" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\University.Application\Cinema.Application.csproj" />
-	  <ProjectReference Include="..\University.Models\Cinema.Models.csproj" />
-	  <ProjectReference Include="..\University.Persistence\Cinema.Persistence.csproj" />
+	  <ProjectReference Include="..\Cinema.Application\Cinema.Application.csproj" />
+	  <ProjectReference Include="..\Cinema.Models\Cinema.Models.csproj" />
+	  <ProjectReference Include="..\Cinema.Persistence\Cinema.Persistence.csproj" />
 	</ItemGroup>
 
 </Project>

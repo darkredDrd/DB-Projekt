@@ -2,9 +2,9 @@
 
 using Microsoft.AspNetCore.Mvc;
 
-using University.Application.Reports;
+using Cinema.Application.Reports;
 
-namespace University.MVC.Controllers
+namespace Cinema.MVC.Controllers
 {
     public class ReportController : Controller
     {

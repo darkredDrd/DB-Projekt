@@ -1,10 +1,10 @@
-﻿using MediatR;
+﻿//using MediatR;
 
-using University.Models.Reports;
+//using Cinema.Models.Reports;
 
-namespace University.Application.Reports
-{
-    public class GetReportsQuery : IRequest<List<MongoDbReport>>
-    {
-    }
-}
+//namespace Cinema.Application.Reports
+//{
+//    public class GetReportsQuery : IRequest<List<MongoDbReport>>
+//    {
+//    }
+//}

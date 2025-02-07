@@ -1,25 +1,25 @@
-﻿using MediatR;
+﻿//using MediatR;
 
-using MongoDB.Driver;
+//using MongoDB.Driver;
 
-using University.Models.Reports;
+//using Cinema.Models.Reports;
 
-namespace University.Application.Reports;
+//namespace Cinema.Application.Reports;
 
-public class GetReportsQueryHandler : IRequestHandler<GetReportsQuery, List<MongoDbReport>>
-{
-    private readonly MongoDatabaseBase mongoDatabase;
+//public class GetReportsQueryHandler : IRequestHandler<GetReportsQuery, List<MongoDbReport>>
+//{
+//    private readonly MongoDatabaseBase mongoDatabase;
 
 
-    public GetReportsQueryHandler(MongoDatabaseBase mongoDatabase)
-    {
-        this.mongoDatabase = mongoDatabase;
-    }
+//    public GetReportsQueryHandler(MongoDatabaseBase mongoDatabase)
+//    {
+//        this.mongoDatabase = mongoDatabase;
+//    }
 
-    public async Task<List<MongoDbReport>> Handle(GetReportsQuery request, CancellationToken cancellationToken)
-    {
-        var reportCollection = mongoDatabase.GetCollection<MongoDbReport>("reports");
+//    public async Task<List<MongoDbReport>> Handle(GetReportsQuery request, CancellationToken cancellationToken)
+//    {
+//        var reportCollection = mongoDatabase.GetCollection<MongoDbReport>("reports");
 
-        return await reportCollection.AsQueryable().ToListAsync(cancellationToken);
-    }
-}
+//        return await reportCollection.AsQueryable().ToListAsync(cancellationToken);
+//    }
+//}

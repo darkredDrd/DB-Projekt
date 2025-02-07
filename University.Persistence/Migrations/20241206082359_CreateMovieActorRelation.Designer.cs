@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using University.Persistence;
+using Cinema.Persistence;
 
 #nullable disable
 
-namespace University.Persistence.Migrations
+namespace Cinema.Persistence.Migrations
 {
-    [DbContext(typeof(UniversityContext))]
+    [DbContext(typeof(CinemaContext))]
     [Migration("20241206082359_CreateCourseStudentRelation")]
     partial class CreateCourseStudentRelation
     {
@@ -40,7 +40,7 @@ namespace University.Persistence.Migrations
                     b.ToTable("CourseStudent");
                 });
 
-            modelBuilder.Entity("University.Models.Course", b =>
+            modelBuilder.Entity("Cinema.Models.Course", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -67,7 +67,7 @@ namespace University.Persistence.Migrations
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("University.Models.Student", b =>
+            modelBuilder.Entity("Cinema.Models.Student", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -109,13 +109,13 @@ namespace University.Persistence.Migrations
 
             modelBuilder.Entity("CourseStudent", b =>
                 {
-                    b.HasOne("University.Models.Course", null)
+                    b.HasOne("Cinema.Models.Course", null)
                         .WithMany()
                         .HasForeignKey("CoursesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("University.Models.Student", null)
+                    b.HasOne("Cinema.Models.Student", null)
                         .WithMany()
                         .HasForeignKey("StudentsId")
                         .OnDelete(DeleteBehavior.Cascade)

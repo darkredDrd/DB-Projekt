@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using University.Persistence;
+using Cinema.Persistence;
 
 #nullable disable
 
-namespace University.Persistence.Migrations
+namespace Cinema.Persistence.Migrations
 {
-    [DbContext(typeof(UniversityContext))]
+    [DbContext(typeof(CinemaContext))]
     [Migration("20241206130900_RenameMarkTable")]
     partial class RenameMarkTable
     {
@@ -55,7 +55,7 @@ namespace University.Persistence.Migrations
                     b.ToTable("CourseTeacher");
                 });
 
-            modelBuilder.Entity("University.Models.Course", b =>
+            modelBuilder.Entity("Cinema.Models.Course", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -82,7 +82,7 @@ namespace University.Persistence.Migrations
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("University.Models.Mark", b =>
+            modelBuilder.Entity("Cinema.Models.Mark", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -116,7 +116,7 @@ namespace University.Persistence.Migrations
                     b.ToTable("Marks");
                 });
 
-            modelBuilder.Entity("University.Models.Student", b =>
+            modelBuilder.Entity("Cinema.Models.Student", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -156,7 +156,7 @@ namespace University.Persistence.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("University.Models.Teacher", b =>
+            modelBuilder.Entity("Cinema.Models.Teacher", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -198,13 +198,13 @@ namespace University.Persistence.Migrations
 
             modelBuilder.Entity("CourseStudent", b =>
                 {
-                    b.HasOne("University.Models.Course", null)
+                    b.HasOne("Cinema.Models.Course", null)
                         .WithMany()
                         .HasForeignKey("CoursesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("University.Models.Student", null)
+                    b.HasOne("Cinema.Models.Student", null)
                         .WithMany()
                         .HasForeignKey("StudentsId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -213,30 +213,30 @@ namespace University.Persistence.Migrations
 
             modelBuilder.Entity("CourseTeacher", b =>
                 {
-                    b.HasOne("University.Models.Course", null)
+                    b.HasOne("Cinema.Models.Course", null)
                         .WithMany()
                         .HasForeignKey("CoursesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("University.Models.Teacher", null)
+                    b.HasOne("Cinema.Models.Teacher", null)
                         .WithMany()
                         .HasForeignKey("TeachersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("University.Models.Mark", b =>
+            modelBuilder.Entity("Cinema.Models.Mark", b =>
                 {
-                    b.HasOne("University.Models.Course", "Course")
+                    b.HasOne("Cinema.Models.Course", "Course")
                         .WithMany("Marks")
                         .HasForeignKey("CourseId");
 
-                    b.HasOne("University.Models.Student", "Student")
+                    b.HasOne("Cinema.Models.Student", "Student")
                         .WithMany("Marks")
                         .HasForeignKey("StudentId");
 
-                    b.HasOne("University.Models.Teacher", "Teacher")
+                    b.HasOne("Cinema.Models.Teacher", "Teacher")
                         .WithMany("Marks")
                         .HasForeignKey("TeacherId");
 
@@ -247,17 +247,17 @@ namespace University.Persistence.Migrations
                     b.Navigation("Teacher");
                 });
 
-            modelBuilder.Entity("University.Models.Course", b =>
+            modelBuilder.Entity("Cinema.Models.Course", b =>
                 {
                     b.Navigation("Marks");
                 });
 
-            modelBuilder.Entity("University.Models.Student", b =>
+            modelBuilder.Entity("Cinema.Models.Student", b =>
                 {
                     b.Navigation("Marks");
                 });
 
-            modelBuilder.Entity("University.Models.Teacher", b =>
+            modelBuilder.Entity("Cinema.Models.Teacher", b =>
                 {
                     b.Navigation("Marks");
                 });
